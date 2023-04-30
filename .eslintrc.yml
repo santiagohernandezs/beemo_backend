@@ -9,6 +9,6 @@ parserOptions:
   sourceType: module
   project: './tsconfig.json'
 rules: {
-  semi: ['error', 'never'],
+  semi: ['error', 'always'],
   'comma-dangle': ['error', 'never'],
 }
