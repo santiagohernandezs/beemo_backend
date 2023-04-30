@@ -20,6 +20,6 @@
     "eslint-plugin-promise": "^6.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
-    "typescript": "*"
+    "typescript": "^5.0.4"
   }
 }
