@@ -9,3 +9,145 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum RoleType {
+  USER
+  SUPERUSER
+  ADMIN
+}
+
+enum DepartmentType {
+  IT
+  SUPPORT
+  NOC
+  HR
+  FINANCE
+  MARKETING
+  SALES
+  CUSTOMER_SERVICE
+}
+
+enum StatusType {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum ServiceType {
+  AP
+  PTP
+  CP
+}
+
+enum capacityScaleType {
+  MBPS
+  GBPS
+  TBPS
+}
+
+enum failureType {
+  Electrical
+  Frequency
+  Hardware
+  Software
+}
+
+enum severityType {
+  Critical
+  Major
+  Minor
+}
+
+model User {
+  id           String     @id @default(uuid())
+  name         String
+  lastname     String
+  email        String     @unique
+  password     String
+  role         RoleType   @default(USER)
+  department   Department @relation(fields: [departmentId], references: [id])
+  departmentId String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  tickets      Ticket[]
+}
+
+model Department {
+  id        String         @id @default(uuid())
+  name      DepartmentType @default(IT)
+  users     User[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
+
+model Ticket {
+  id        String       @id @default(uuid())
+  title     String
+  content   String
+  type      failureType  @default(Electrical)
+  severity  severityType @default(Minor)
+  startDate DateTime
+  endDate   DateTime
+  services  Service[]
+  authors   User[]
+  status    StatusType   @default(OPEN)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+model Service {
+  id        String            @id @default(uuid())
+  name      String
+  type      ServiceType       @default(AP)
+  code      String
+  capacity  Int
+  scale     capacityScaleType @default(MBPS)
+  rs        String
+  owner     Client            @relation(fields: [ownerId], references: [id])
+  ownerId   String
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  tickets   Ticket[]
+}
+
+model Client {
+  id        String    @id @default(uuid())
+  name      String
+  lastname  String
+  email     String    @unique
+  phone     String
+  address   String
+  services  Service[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Rs {
+  id        String   @id @default(uuid())
+  name      String
+  code      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Location {
+  id            String      @id @default(uuid())
+  name          String
+  code          String
+  city          String
+  municipality  String
+  coordinates   Coordinates @relation(fields: [coordinatesId], references: [id])
+  coordinatesId String      @unique
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Coordinates {
+  id        String    @id @default(uuid())
+  latitude  String
+  longitude String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Location  Location?
+}
