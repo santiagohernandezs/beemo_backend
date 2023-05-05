@@ -1,4 +1,4 @@
-import userResolers from '../../user/domain/resolvers/index.ts'
+import userResolers from '../../user/infrastructure/resolvers/index.ts'
 
 const resolvers = {
   Query: {
