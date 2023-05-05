@@ -12,5 +12,7 @@
     "outDir": "dist",
     "lib": ["es2020"],
     "types": ["node"]
-  }
+  },
+
+  "exclude": ["node_modules", "dist"]
 }
