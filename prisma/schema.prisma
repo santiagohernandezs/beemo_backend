@@ -60,22 +60,22 @@ enum severityType {
 }
 
 model User {
-  id           String     @id @default(uuid())
-  name         String
-  lastname     String
-  email        String     @unique
-  password     String
-  role         RoleType   @default(USER)
-  department   Department @relation(fields: [departmentId], references: [id])
-  departmentId String
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  tickets      Ticket[]
+  id             String         @id @default(uuid())
+  name           String
+  lastname       String
+  email          String         @unique
+  password       String
+  role           RoleType       @default(USER)
+  department     Department     @relation(fields: [departmentName], references: [name])
+  departmentName DepartmentType
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  tickets        Ticket[]
 }
 
 model Department {
   id        String         @id @default(uuid())
-  name      DepartmentType @default(IT)
+  name      DepartmentType @unique
   users     User[]
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
