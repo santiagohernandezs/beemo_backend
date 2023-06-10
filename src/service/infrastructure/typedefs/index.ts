@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-// import inputs from './inputs/index.ts'
-// import mutations from './mutations/index.ts'
-// import querys from './querys/index.ts'
+import inputs from './inputs/index.ts'
+import mutations from './mutations/index.ts'
+import querys from './querys/index.ts'
 
 const typeDefs = gql`
   enum serviceType {
@@ -15,6 +15,7 @@ const typeDefs = gql`
     TBPS
   }
 
+  ${inputs}
   type Service {
     id: String!
     name: String!
@@ -28,6 +29,8 @@ const typeDefs = gql`
     updatedAt: String!
     tickets: [Ticket!]
   }
+  ${querys}
+  ${mutations}
 `
 
 export default typeDefs
