@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from '../../db/connection.ts'
 
 const newUser = async args => {
   return await prisma.user.create({
@@ -10,7 +9,11 @@ const newUser = async args => {
 }
 
 const users = async () => {
-  return await prisma.user.findMany()
+  return await prisma.user.findMany({
+    include: {
+      tickets: true
+    }
+  })
 }
 
 const userById = async id => {
@@ -21,4 +24,4 @@ const userById = async id => {
   })
 }
 
-export { newUser, users, userById }
+export { newUser, userById, users }
