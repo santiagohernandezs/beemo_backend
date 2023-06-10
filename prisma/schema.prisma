@@ -87,8 +87,8 @@ model Ticket {
   content   String
   type      failureType  @default(Electrical)
   severity  severityType @default(Minor)
-  startDate DateTime
-  endDate   DateTime
+  startDate DateTime?     @default(now())
+  endDate   DateTime?
   services  Service[]
   authors   User[]
   status    StatusType   @default(OPEN)
