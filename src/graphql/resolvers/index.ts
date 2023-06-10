@@ -1,11 +1,17 @@
-import userResolers from '../../user/infrastructure/resolvers/index.ts'
+import serviceResolvers from '../../service/infrastructure/resolvers/index.ts'
+import ticketResolvers from '../../tickets/infrastructure/resolvers/index.ts'
+import userResolvers from '../../user/infrastructure/resolvers/index.ts'
 
 const resolvers = {
   Query: {
-    ...userResolers.Query
+    ...userResolvers.Query,
+    ...ticketResolvers.Query,
+    ...serviceResolvers.Query
   },
   Mutation: {
-    ...userResolers.Mutation
+    ...userResolvers.Mutation,
+    ...ticketResolvers.Mutation,
+    ...serviceResolvers.Mutation
   }
 }
 
