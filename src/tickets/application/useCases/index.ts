@@ -1,6 +1,13 @@
 import type { Ticket, User } from '@prisma/client'
 import { userById } from '../../../user/domain/controllers.ts'
-import { deleteTicket, newTicket, ticketById, tickets } from '../../domain/controllers.ts'
+import {
+  deleteAuthor,
+  deleteTicket,
+  newAuthor,
+  newTicket,
+  ticketById,
+  tickets
+} from '../../domain/controllers.ts'
 
 const getTickets = async () => tickets()
 
@@ -25,4 +32,26 @@ const erraseTicket = async args => {
   return await deleteTicket(id)
 }
 
-export { createTicket, erraseTicket, getTickets }
+const addAuthor = async args => {
+  const { id } = args.input
+  const ticket: Ticket | null = await ticketById(id)
+
+  if (!ticket) {
+    throw new Error('Ticket not found')
+  }
+
+  return await newAuthor(args)
+}
+
+const removeAuthor = async args => {
+  const { id } = args.input
+  const ticket: Ticket | null = await ticketById(id)
+
+  if (!ticket) {
+    throw new Error('Ticket not found')
+  }
+
+  return await deleteAuthor(args)
+}
+
+export { addAuthor, createTicket, erraseTicket, getTickets, removeAuthor }

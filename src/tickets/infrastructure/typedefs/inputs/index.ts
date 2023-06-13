@@ -23,6 +23,20 @@ const inputs = gql`
   input DeleteTicketInput {
     id: String!
   }
+
+  input EditTicketInput {
+    title: String!
+    content: String!
+    type: failureType!
+    severity: severityType!
+    status: Status!
+    endDate: String
+  }
+
+  input EditTicketCoAuthorInput {
+    id: String!
+    authors: [referenceUserInput!]
+  }
 `
 
 export default inputs

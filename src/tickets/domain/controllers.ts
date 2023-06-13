@@ -42,4 +42,32 @@ const deleteTicket = async id => {
   })
 }
 
-export { deleteTicket, newTicket, ticketById, tickets }
+const newAuthor = async args => {
+  return await prisma.ticket.update({
+    where: {
+      id: args.input.id
+    },
+    data: {
+      ...args.input,
+      authors: {
+        connect: args.input.authors.map(author => ({ id: author.id }))
+      }
+    }
+  })
+}
+
+const deleteAuthor = async args => {
+  return await prisma.ticket.update({
+    where: {
+      id: args.input.id
+    },
+    data: {
+      ...args.input,
+      authors: {
+        disconnect: args.input.authors.map(author => ({ id: author.id }))
+      }
+    }
+  })
+}
+
+export { deleteAuthor, deleteTicket, newAuthor, newTicket, ticketById, tickets }
