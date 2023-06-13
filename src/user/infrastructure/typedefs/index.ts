@@ -16,7 +16,7 @@ const typeDefs = gql`
     NOC
     HR
     FINANCE
-    MARKEeTING
+    MARKETING
     SALES
     CUSTOMER_SERVICE
   }
