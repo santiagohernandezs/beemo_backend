@@ -21,7 +21,7 @@ jobs:
             - name: Check files
               run: "ls -la"
             - name: Install dependencies
-              run: "pnpm install --frozen-lockfile"
+              run: "npm ci"
             - name: Upload files
               uses: actions/upload-artifact@v2
               with:
