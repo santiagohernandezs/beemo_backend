@@ -7,23 +7,7 @@ on:
       - chore/**
 
 jobs:
-    node:
-        runs-on: ubuntu-20.04
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-              with:
-                    fetch-depth: 0
-            - name: Set up Node.js
-              uses: actions/setup-node@v2
-              with:
-                node-version: '18'
-            - name: Check files
-              run: "ls -la"
-            - name: Install dependencies
-              run: "npm install --no-optional --no-audit --no-fund"
     lint:
-        needs: node
         runs-on: ubuntu-20.04
         steps:
             - name: Checkout
@@ -34,6 +18,8 @@ jobs:
               uses: actions/setup-node@v2
               with:
                 node-version: '18'
+            - name: Install dependencies
+              run: npm install --no-optional --no-audit --no-fund
             - name: Check files
               run: "ls -la"
             - name: Lint
