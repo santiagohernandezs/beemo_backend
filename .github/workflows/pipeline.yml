@@ -37,7 +37,7 @@ jobs:
             #         name: files
             #         path: ./
             - name: Prettify
-              run: "npx prettier --write ."
+              run: "npx prettier --write ./src/**/*"
             - name: Lint
               run: "npm run lint --fix ."
     
