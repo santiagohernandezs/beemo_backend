@@ -7,15 +7,7 @@ on:
       - chore/**
 
 jobs:
-    install:
-        runs-on: ubuntu-latest
-        steps:
-          - uses: pnpm/action-setup@v2
-            with:
-              version: 8.6.6
-
     node:
-        needs: install
         runs-on: ubuntu-20.04
         steps:
             - name: Checkout
@@ -29,7 +21,7 @@ jobs:
             - name: Check files
               run: "ls -la"
             - name: Install dependencies
-              run: "pnpm i"
+              run: "npm install --no-optional --no-audit --no-fund"
             - name: Upload files
               uses: actions/upload-artifact@v2
               with:
