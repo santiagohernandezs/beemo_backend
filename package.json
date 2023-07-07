@@ -10,7 +10,8 @@
     "studio": "npx prisma studio",
     "format": "npx prisma format",
     "migrate:dev": "npx prisma migrate dev --name init",
-    "compose": "docker-compose up"
+    "compose": "docker-compose up",
+    "lint": "eslint --ext .ts src"
   },
   "keywords": [],
   "author": "",
