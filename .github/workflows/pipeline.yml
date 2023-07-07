@@ -36,6 +36,8 @@ jobs:
             #   with:
             #         name: files
             #         path: ./
+            - name: Check files
+              run: "ls -la"
             - name: Lint
               run: "npm run lint --fix ."
     
