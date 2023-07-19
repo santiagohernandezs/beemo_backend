@@ -1,27 +1,16 @@
+import type { Prisma } from '@prisma/client'
 import prisma from '../../db/connection.ts'
 
-const newUser = async args => {
-  return await prisma.user.create({
-    data: {
-      ...args.input
-    }
-  })
+const newUser = async (args: Prisma.UserCreateArgs) => {
+  return await prisma.user.create(args)
 }
 
-const users = async () => {
-  return await prisma.user.findMany({
-    include: {
-      tickets: true
-    }
-  })
+const users = async (args: Prisma.UserFindManyArgs) => {
+  return await prisma.user.findMany(args)
 }
 
-const userById = async id => {
-  return await prisma.user.findUnique({
-    where: {
-      id
-    }
-  })
+const user = async (args: Prisma.RsFindUniqueArgs) => {
+  return await prisma.user.findUnique(args)
 }
 
-export { newUser, userById, users }
+export { newUser, user, users }
