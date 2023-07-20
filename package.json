@@ -11,7 +11,7 @@
     "format": "npx prisma format",
     "migrate:dev": "npx prisma migrate dev --name init",
     "compose": "docker-compose up",
-    "linr": "eslint --ext .ts src/ --fix"
+    "lint": "eslint --ext .ts src/ --fix"
   },
   "keywords": [],
   "author": "",
