@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: 'pnpm install' 
       - name: Lint
-        run: 'pnpm lint -ext .ts .'
+        run: 'pnpm lint -- --fix .'
   build:
     needs: lint
     runs-on: ubuntu-20.04
