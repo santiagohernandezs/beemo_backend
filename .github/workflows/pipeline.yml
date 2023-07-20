@@ -52,6 +52,8 @@ jobs:
         uses: actions/setup-node@v3.7.0
         with:
          node-version: 16
+      - name: Install dependencies
+        run: 'pnpm install' 
       - name: Build
         run: 'tsc -outDir dist'
   notify:
