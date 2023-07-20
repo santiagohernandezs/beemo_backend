@@ -27,6 +27,8 @@ jobs:
           node-version: 16
       - name: Check files
         run: 'ls -la'
+      - name: Install dependencies
+        run: 'pnpm install --frozen-lockfile'
       - name: Lint
         run: 'npm run lint --fix .'
   build:
