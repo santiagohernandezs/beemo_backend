@@ -33,7 +33,7 @@ jobs:
       - name: Check files
         run: 'ls -la'
       - name: Install dependencies
-        run: 'pnpm install --frozen-lockfile' 
+        run: 'pnpm install' 
       - name: Lint
         run: 'npm run lint --fix .'
   build:
