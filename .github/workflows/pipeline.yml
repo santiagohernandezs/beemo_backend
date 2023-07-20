@@ -64,5 +64,5 @@ jobs:
         uses: actions/checkout@v2
       - uses: fateyan/action-discord-notifier@v1
         with:
-          message-title: New Commits Pushed to ${{ github.repository }} in ${{ github.ref }}
+          message-title: New Commits Pushed to Beemo_backend in ${{ github.action_ref }} by ${{ github.actor }} 
           webhook: https://discordapp.com/api/webhooks/1131340717827031180/j1breMDa3JBzZ_BrXQZNqOwxQgG8cxiXbIz2g5JOpnmihmoQH7-jr0H_PiDvdP2dcdXm
