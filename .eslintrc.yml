@@ -11,7 +11,7 @@ parserOptions:
 rules:
   {
     'prefer-const': 'error',
-    'no-console': ['error', { 'allow': ['warn', 'error'] }],
+    'no-console': ['error', { 'allow': ['warn', 'error', 'info'] }],
     'camelcase': 'off',
     'react/display-name': 0,
     'semi': ['error', 'never'],
