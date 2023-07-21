@@ -30,4 +30,5 @@ rules:
     '@typescript-eslint/return-await': 'off',
     '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/strict-boolean-expressions': 'off',
+    '@typescript-eslint/consistent-type-definitions': 'off',
   }
