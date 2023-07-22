@@ -8,9 +8,13 @@ type ClientData = {
   address: string
 }
 
+type UpdateData = {
+  id: string
+  data: PartialClientData
+}
 type PartialClientData = Partial<ClientData>
 type CreateClientInput = GenericInput<ClientData>
-type UpdateClientInput = GenericInput<PartialClientData>
+type UpdateClientInput = GenericInput<UpdateData>
 type FindClientById = GenericInput<{ id: string }>
 
 export type {
@@ -18,5 +22,6 @@ export type {
   PartialClientData,
   CreateClientInput,
   FindClientById,
-  UpdateClientInput
+  UpdateClientInput,
+  UpdateData
 }

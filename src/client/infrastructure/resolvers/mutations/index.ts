@@ -1,9 +1,20 @@
-import { createClient, deleteClientById } from '../../../application/useCases/index.ts'
-import type { CreateClientInput, FindClientById } from '../../../types/core/types.ts'
+import {
+  createClient,
+  deleteClientById,
+  updateClientById
+} from '../../../application/useCases/index.ts'
+import type {
+  CreateClientInput,
+  FindClientById,
+  UpdateClientInput
+} from '../../../types/core/types.ts'
 
 const Mutation = {
   createClient: async (_: unknown, args: CreateClientInput) => createClient(args.input),
-  deleteClient: async (_: unknown, args: FindClientById) => deleteClientById(args.input)
+  deleteClientById: async (_: unknown, args: FindClientById) =>
+    deleteClientById(args.input),
+  updateClientById: async (_: unknown, args: UpdateClientInput) =>
+    updateClientById(args.input)
 }
 
 export default Mutation

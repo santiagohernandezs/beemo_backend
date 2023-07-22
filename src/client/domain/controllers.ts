@@ -17,8 +17,8 @@ const clients = async (args: Prisma.ClientFindManyArgs) => {
   return await prisma.client.findMany(args)
 }
 
-const client = async (args: Prisma.ClientFindUniqueArgs) => {
+const clientById = async (args: Prisma.ClientFindUniqueArgs) => {
   return await prisma.client.findUnique(args)
 }
 
-export { newClient, clients, client, deletedClient, updatedClient }
+export { newClient, clients, clientById, deletedClient, updatedClient }

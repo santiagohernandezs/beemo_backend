@@ -6,7 +6,7 @@ const mutations = gql`
 
   type Mutation {
     createClient(input: CreateClientInput!): Client
-    deleteClientById(input: FindClientById!): Client
+    updateClientById(input: UpdateClientInput!): Client
     deleteClientById(input: FindClientById!): Client
   }
 `

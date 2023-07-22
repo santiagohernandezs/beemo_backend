@@ -10,12 +10,17 @@ const inputs = gql`
     address: String!
   }
 
-  input UpdateClientInput {
+  input UpdateData {
     name: String
     lastname: String
     email: String
     phone: String
     address: String
+  }
+
+  input UpdateClientInput {
+    id: String!
+    data: UpdateData!
   }
 
   input FindClientById {
