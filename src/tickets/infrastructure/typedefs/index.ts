@@ -24,6 +24,34 @@ const typeDefs = gql`
     Minor
   }
 
+  enum Tag {
+    AP
+    PTP
+    CP
+    Electrical
+    Frequency
+    Hardware
+    Software
+    Critical
+    Major
+    Minor
+    OPEN
+    IN_PROGRESS
+    RESOLVED
+    CLOSED
+    IT
+    SUPPORT
+    NOC
+    HR
+    FINANCE
+    MARKETING
+    SALES
+    CUSTOMER_SERVICE
+    MBPS
+    GBPS
+    TBPS
+  }
+
   ${inputs}
   type Ticket {
     id: String!
@@ -31,12 +59,14 @@ const typeDefs = gql`
     content: String!
     type: failureType!
     severity: severityType!
-    startDate: String
-    endDate: String
     services: [Service!]
-    authors: [User!]
+    author: User!
+    tags: [Tag!]
+    editors: [User!]
     createdAt: String!
     updatedAt: String!
+    closedAt: String!
+    timeToClose: String!
   }
   ${querys}
   ${mutations}

@@ -1,7 +1,7 @@
 import { newUser, user, users } from '../../domain/controllers.ts'
-import type { UserData } from '../../types/core/types.ts'
+import type { UserDTO } from '../../types/core/types.ts'
 
-const createUser = async (args: UserData) =>
+const createUser = async (args: UserDTO) =>
   newUser({
     data: {
       ...args
@@ -18,3 +18,4 @@ const getUsers = async () =>
 const getUserById = async (id: string) => user({ where: { id } })
 
 export { createUser, getUserById, getUsers }
+

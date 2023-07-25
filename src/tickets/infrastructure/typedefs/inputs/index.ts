@@ -15,8 +15,9 @@ const inputs = gql`
     type: failureType
     severity: severityType
     status: Status
-    authors: [referenceUserInput!]
+    author: referenceUserInput!
     services: [referenceServiceInput!]
+    tags: [Tag!]
     endDate: String
   }
 
@@ -24,18 +25,24 @@ const inputs = gql`
     id: String!
   }
 
-  input EditTicketInput {
-    title: String!
-    content: String!
-    type: failureType!
-    severity: severityType!
-    status: Status!
-    endDate: String
+  input UpdateTicketInput {
+    id: String!
+    title: String
+    content: String
+    type: failureType
+    severity: severityType
+    status: Status
+    services: [referenceServiceInput]
+    tags: [Tag]
   }
 
-  input EditTicketCoAuthorInput {
+  input AddEditorInput {
     id: String!
-    authors: [referenceUserInput!]
+    editor: referenceUserInput!
+  }
+
+  input CloseTicketInput {
+    id: String!
   }
 `
 

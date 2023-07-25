@@ -1,73 +1,20 @@
+import type { Prisma } from '@prisma/client'
 import prisma from '../../db/connection.ts'
 
-const tickets = async () => {
-  return await prisma.ticket.findMany({
-    include: {
-      authors: true,
-      services: true
-    }
-  })
+const tickets = async (args: Prisma.TicketFindManyArgs) =>
+  await prisma.ticket.findMany(args)
+
+const newTicket = async (args: Prisma.TicketCreateArgs) =>
+  await prisma.ticket.create(args)
+
+const ticket = async (args: Prisma.TicketFindUniqueArgs) =>
+  await prisma.ticket.findUnique(args)
+
+const deleteTicket = async (args: Prisma.TicketDeleteArgs) =>
+  await prisma.ticket.delete(args)
+
+const updateTicket = async (args: Prisma.TicketUpdateArgs) => {
+  return await prisma.ticket.update(args)
 }
 
-const newTicket = async args => {
-  return await prisma.ticket.create({
-    data: {
-      ...args.input,
-      authors: {
-        connect: args.input.authors.map(author => ({ id: author.id }))
-      },
-      services: {
-        connect: args.input.services.map(service => ({ id: service.id }))
-      }
-    },
-    include: {
-      authors: true
-    }
-  })
-}
-
-const ticketById = async id => {
-  return await prisma.ticket.findUnique({
-    where: {
-      id
-    }
-  })
-}
-
-const deleteTicket = async id => {
-  return await prisma.ticket.delete({
-    where: {
-      id
-    }
-  })
-}
-
-const newAuthor = async args => {
-  return await prisma.ticket.update({
-    where: {
-      id: args.input.id
-    },
-    data: {
-      ...args.input,
-      authors: {
-        connect: args.input.authors.map(author => ({ id: author.id }))
-      }
-    }
-  })
-}
-
-const deleteAuthor = async args => {
-  return await prisma.ticket.update({
-    where: {
-      id: args.input.id
-    },
-    data: {
-      ...args.input,
-      authors: {
-        disconnect: args.input.authors.map(author => ({ id: author.id }))
-      }
-    }
-  })
-}
-
-export { deleteAuthor, deleteTicket, newAuthor, newTicket, ticketById, tickets }
+export { deleteTicket, newTicket, ticket, tickets, updateTicket }

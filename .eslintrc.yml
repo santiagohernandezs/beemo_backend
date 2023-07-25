@@ -2,7 +2,7 @@ env:
   browser: true
   es2021: true
   node: true
-extends: standard-with-typescript
+extends: "plugin:@typescript-eslint/recommended"
 overrides: []
 parserOptions:
   ecmaVersion: latest
@@ -31,4 +31,6 @@ rules:
     '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/consistent-type-definitions': 'off',
+    '@typescript-eslint/key-spacing': 'off',
+    '@typescript-eslint/member-delimiter-style': 'off'
   }

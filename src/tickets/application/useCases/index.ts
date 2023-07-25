@@ -1,58 +1,184 @@
-import type { Ticket, User } from '@prisma/client'
+import type { User } from '@prisma/client'
 import { raise } from '../../../shared/helpers/errors.ts'
 import { user } from '../../../user/domain/controllers.ts'
 import {
-  deleteAuthor,
   deleteTicket,
-  newAuthor,
   newTicket,
-  ticketById,
-  tickets
+  tickets,
+  updateTicket
 } from '../../domain/controllers.ts'
+import type { TicketDTO } from '../../types/core/types.ts'
+import { findTicketById } from '../helpers/helpers.ts'
 
-const getTickets = async () => tickets()
+const getTickets = async () =>
+  tickets({
+    include: {
+      author: true,
+      services: true,
+      editors: true
+    }
+  })
 
-const createTicket = async args => {
-  const currentUser: User | null = await user({ where: { id: args.input.authorId } })
+/**
+ * Returns the new ticket created
+ *
+ * @param args - the object with the data to create a new ticket
+ * @returns The new ticket
+ */
+
+const createTicket = async (args: TicketDTO) => {
+  const currentUser: Awaited<User | null> = await user({
+    where: { id: args.author.id }
+  })
 
   if (!currentUser) {
     raise('Error', 'User not found')
   }
 
-  return await newTicket(args)
+  return await newTicket({
+    data: {
+      ...args,
+      author: {
+        connect: { id: args.author.id }
+      },
+      services: {
+        connect: args.services.map(service => ({ id: service.id }))
+      },
+      editors: {
+        connect: args.editor?.map(editor => ({ id: editor.id })) ?? []
+      }
+    }
+  })
 }
 
-const erraseTicket = async args => {
-  const { id } = args.input
-  const ticket: Ticket | null = await ticketById(id)
+/**
+ * Erases a ticket by id
+ *
+ * @param id - the id of the ticket
+ * @throws {Error} - if the ticket is not found
+ * @returns The deleted ticket
+ */
 
-  if (!ticket) {
-    raise('Error', 'Ticket not found')
-  }
+const erraseTicket = async (id: string) => {
+  const ticket = await findTicketById(id)
 
-  return await deleteTicket(id)
+  return await deleteTicket({ where: { id: ticket.id } })
 }
 
-const addAuthor = async args => {
-  const { id } = args.input
-  const ticket: Ticket | null = await ticketById(id)
+/**
+ * Add an editor to a ticket
+ *
+ * @param args - the arguments to add an editor to a ticket
+ * @param args.id - the id of the ticket
+ * @param args.editor.id - the id of the editor
+ *
+ * @throws {Error} - if the ticket is not found
+ * @returns The ticket with the new editor
+ */
 
-  if (!ticket) {
-    raise('Error', 'Ticket not found')
-  }
+const addEditor = async (args: { id: string; editor: { id: string } }) => {
+  const { id } = args
+  const ticket = await findTicketById(id)
 
-  return await newAuthor(args)
+  return await updateTicket({
+    where: { id: ticket.id },
+    data: {
+      editors: {
+        connect: { id: args.editor.id }
+      }
+    }
+  })
 }
 
-const removeAuthor = async args => {
-  const { id } = args.input
-  const ticket: Ticket | null = await ticketById(id)
+/**
+ * Remove an editor from a ticket
+ *
+ * @param args - the arguments to add an editor to a ticket
+ * @param args.id - the id of the ticket
+ * @param args.editor.id - the id of the editor
+ *
+ * @throws {Error} - if the ticket is not found
+ * @returns The ticket with the new editor
+ */
 
-  if (!ticket) {
-    raise('Error', 'Ticket not found')
-  }
+const removeEditor = async (args: { id: string; editor: { id: string } }) => {
+  const { id } = args
+  const ticket = await findTicketById(id)
 
-  return await deleteAuthor(args)
+  return await updateTicket({
+    where: { id: ticket.id },
+    data: {
+      editors: {
+        disconnect: { id: args.editor.id }
+      }
+    }
+  })
 }
 
-export { addAuthor, createTicket, erraseTicket, getTickets, removeAuthor }
+/**
+ * Edit a ticket
+ *
+ * @param args - the arguments to add an editor to a ticket
+ * @param args.id - the id of the ticket
+ * * Partial<TicketDTO> - the data to update the ticket
+ *
+ * @throws {Error} - if the ticket is not found
+ * @returns The ticket with the new data
+ */
+
+const editTicket = async (args: { id: string } & Partial<TicketDTO>) => {
+  const { id } = args
+  const ticket = await findTicketById(id)
+
+  return await updateTicket({
+    where: { id: ticket.id },
+    data: {
+      ...args,
+      services: {
+        connect: args.services?.map(service => ({ id: service.id })) ?? []
+      },
+      editors: {
+        connect: args.editor?.map(editor => ({ id: editor.id })) ?? []
+      },
+      author: {
+        connect: { id: args.author?.id ?? ticket.authorId }
+      }
+    }
+  })
+}
+
+/**
+ * Close a ticket
+ *
+ * @param id - the id of the ticket
+ *
+ * @throws {Error} - if the ticket is not found
+ * @returns The ticket with the new data
+ */
+
+const closeTicket = async (id: string) => {
+  const ticket = await findTicketById(id)
+
+  const timeToClose = Math.abs(Date.now() - ticket.createdAt.getTime())
+  const timeToCloseInDays = Math.ceil(timeToClose / (1000 * 60 * 60 * 24))
+
+  return await updateTicket({
+    where: { id: ticket.id },
+    data: {
+      status: 'CLOSED',
+      closedAt: new Date(),
+      timeToClose: timeToCloseInDays
+    }
+  })
+}
+
+export {
+  addEditor,
+  closeTicket,
+  createTicket,
+  editTicket,
+  erraseTicket,
+  getTickets,
+  removeEditor
+}
+

@@ -59,6 +59,34 @@ enum severityType {
   Minor
 }
 
+enum tagType {
+  AP
+  PTP
+  CP
+  Electrical
+  Frequency
+  Hardware
+  Software
+  Critical
+  Major
+  Minor
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+  IT
+  SUPPORT
+  NOC
+  HR
+  FINANCE
+  MARKETING
+  SALES
+  CUSTOMER_SERVICE
+  MBPS
+  GBPS
+  TBPS
+}
+
 model User {
   id             String         @id @default(uuid())
   name           String
@@ -70,7 +98,8 @@ model User {
   departmentName DepartmentType
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
-  tickets        Ticket[]
+  tickets        Ticket[]       @relation("createdTickets")
+  editedTickets  Ticket[]
 }
 
 model Department {
@@ -82,18 +111,21 @@ model Department {
 }
 
 model Ticket {
-  id        String       @id @default(uuid())
-  title     String
-  content   String
-  type      failureType  @default(Electrical)
-  severity  severityType @default(Minor)
-  startDate DateTime?     @default(now())
-  endDate   DateTime?
-  services  Service[]
-  authors   User[]
-  status    StatusType   @default(OPEN)
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  id          String       @id @default(uuid())
+  title       String
+  content     String
+  type        failureType  @default(Electrical)
+  severity    severityType @default(Minor)
+  tags        tagType[]
+  services    Service[]
+  author      User         @relation("createdTickets", fields: [authorId], references: [id])
+  authorId    String
+  editors     User[]
+  status      StatusType   @default(OPEN)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  closedAt    DateTime?
+  timeToClose Int?         @default(0)
 }
 
 model Service {

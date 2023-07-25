@@ -7,8 +7,9 @@ const mutations = gql`
   type Mutation {
     createTicket(input: CreateTicketInput!): Ticket!
     deleteTicket(input: DeleteTicketInput!): Ticket!
-    addAuthor(input: EditTicketCoAuthorInput!): Ticket!
-    removeAuthor(input: EditTicketCoAuthorInput!): Ticket!
+    addEditor(input: AddEditorInput!): Ticket!
+    closeTicket(input: CloseTicketInput!): Ticket!
+    updateTicket(input: UpdateTicketInput!): Ticket!
   }
 `
 

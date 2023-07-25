@@ -1,6 +1,6 @@
 import type { Department, GenericInput, Role } from '../../../shared/types/core/types'
 
-type UserData = {
+type UserDTO = {
   name: string
   lastname: string
   email: string
@@ -9,7 +9,8 @@ type UserData = {
   departmentName: Department
 }
 
-type CreateUserInput = GenericInput<UserData>
+type CreateUserInput = GenericInput<UserDTO>
 type FindUserById = GenericInput<{ id: string }>
 
-export type { CreateUserInput, FindUserById, UserData }
+export type { CreateUserInput, FindUserById, UserDTO }
+
