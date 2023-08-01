@@ -34,6 +34,11 @@ const typeDefs = gql`
     updatedAt: String!
     tickets: [Ticket]
   }
+
+  type Token {
+    token: String!
+  }
+
   ${querys}
   ${mutations}
 `

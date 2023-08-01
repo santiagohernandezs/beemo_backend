@@ -6,6 +6,7 @@ const mutations = gql`
 
   type Mutation {
     createUser(input: CreateUserInput!): User
+    loginUser(input: LoginUserInput!): Token
   }
 `
 

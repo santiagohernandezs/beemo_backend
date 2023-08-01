@@ -9,8 +9,9 @@ const users = async (args: Prisma.UserFindManyArgs) => {
   return await prisma.user.findMany(args)
 }
 
-const user = async (args: Prisma.RsFindUniqueArgs) => {
+const user = async (args: Prisma.UserFindUniqueArgs) => {
   return await prisma.user.findUnique(args)
 }
 
 export { newUser, user, users }
+

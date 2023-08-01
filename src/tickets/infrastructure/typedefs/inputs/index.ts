@@ -9,6 +9,10 @@ const inputs = gql`
     id: String
   }
 
+  input FindTicketByRs {
+    id: String!
+  }
+
   input CreateTicketInput {
     title: String
     content: String

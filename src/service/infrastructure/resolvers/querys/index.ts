@@ -1,7 +1,7 @@
 import { getServices } from '../../../application/useCases/index.ts'
 
 const Query = {
-  services: async () => getServices()
+  services: async () => await getServices()
 }
 
 export default Query

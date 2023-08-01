@@ -13,6 +13,11 @@ const inputs = gql`
   input FindUserById {
     id: String!
   }
+
+  input LoginUserInput {
+    email: String!
+    password: String!
+  }
 `
 
 export default inputs

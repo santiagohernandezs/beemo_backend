@@ -1,7 +1,8 @@
+import type { Prisma } from '@prisma/client'
 import prisma from '../../db/connection.ts'
 
-const services = async () => {
-  return await prisma.service.findMany()
+const services = async (args?: Prisma.ServiceFindManyArgs) => {
+  return await prisma.service.findMany(args)
 }
 
 const newService = async args => {
@@ -12,4 +13,4 @@ const newService = async args => {
   })
 }
 
-export { services, newService }
+export { newService, services }

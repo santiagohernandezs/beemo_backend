@@ -14,12 +14,15 @@ import type {
 } from '../../../types/graphql/types.ts'
 
 export const Mutation = {
-  createTicket: async (_: unknown, args: CreateTicketInput) => createTicket(args.input),
+  createTicket: async (_: unknown, args: CreateTicketInput) =>
+    await createTicket(args.input),
   deleteTicket: async (_: unknown, args: DeleteTicketInput) =>
-    erraseTicket(args.input.id),
-  addEditor: async (_: unknown, args: UpdateEditorInput) => addEditor(args.input),
-  closeTicket: async (_: unknown, args: CloseTicketInput) => closeTicket(args.input.id),
-  updateTicket: async (_: unknown, args: UpdateTicketInput) => editTicket(args.input)
+    await erraseTicket(args.input.id),
+  addEditor: async (_: unknown, args: UpdateEditorInput) => await addEditor(args.input),
+  closeTicket: async (_: unknown, args: CloseTicketInput) =>
+    await closeTicket(args.input.id),
+  updateTicket: async (_: unknown, args: UpdateTicketInput) =>
+    await editTicket(args.input)
 }
 
 export default Mutation

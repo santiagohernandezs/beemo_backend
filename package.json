@@ -10,17 +10,19 @@
     "clean": "pnpm clean:bundles && del pnpm-lock.yaml **/node_modules && pnpm install",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
-    "studio": "npx prisma studio",
-    "format": "npx prisma format",
-    "migrate:dev": "npx prisma migrate dev --name init && npx prisma generate",
+    "format:prisma": "npx prisma format --schema=./prisma/schema.prisma",
+    "studio": "pnpm dlx prisma studio",
+    "migrate:dev": "npx prisma migrate dev --name init && npx prisma generate && npx prisma studio",
+    "migrate:reset": "npx prisma migrate reset",
     "compose": "docker-compose up -d",
     "lint": "eslint --ext .ts src/ --fix",
-    "postinstall": "npx prisma generate"
+    "getready": "pnpm install && pnpm compose && pnpm migrate:dev && pnpm studio"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "18.16.3",
     "@typescript-eslint/eslint-plugin": "5.43.0",
     "@typescript-eslint/parser": "5.59.1",
@@ -38,9 +40,12 @@
   },
   "dependencies": {
     "@apollo/server": "4.7.0",
+    "@graphql-tools/schema": "^10.0.0",
     "@prisma/client": "4.13.0",
     "graphql": "16.6.0",
-    "graphql-tag": "2.12.6"
+    "graphql-middleware": "^6.1.35",
+    "graphql-tag": "2.12.6",
+    "jsonwebtoken": "^9.0.1"
   },
   "engines": {
     "node": ">=18.17.0"

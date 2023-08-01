@@ -11,6 +11,7 @@ type UserDTO = {
 
 type CreateUserInput = GenericInput<UserDTO>
 type FindUserById = GenericInput<{ id: string }>
+type LoginUserInput = GenericInput<Pick<UserDTO, 'email' | 'password'>>
 
-export type { CreateUserInput, FindUserById, UserDTO }
+export type { CreateUserInput, FindUserById, LoginUserInput, UserDTO }
 

@@ -8,11 +8,15 @@ type UpdateEditorInput = GenericInput<{ id: string; editor: { id: string } }>
 type CloseTicketInput = GenericInput<{ id: string }>
 type UpdateTicketInput = GenericInput<{ id: string; data: Partial<TicketDTO> }>
 
+type FindTicketByRs = GenericInput<{ id: string }>
+
 export type {
   CloseTicketInput,
   CreateTicketInput,
   DeleteTicketInput,
   FindTicketById,
+  FindTicketByRs,
   UpdateEditorInput,
   UpdateTicketInput
 }
+

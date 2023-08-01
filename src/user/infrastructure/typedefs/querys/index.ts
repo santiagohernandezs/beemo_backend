@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 const querys = gql`
   type Query {
     users: [User]
-    userById(id: String!): User
+    userById(input: FindUserById): User
   }
 `
 

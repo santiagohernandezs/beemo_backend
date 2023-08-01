@@ -23,7 +23,7 @@ const typeDefs = gql`
     code: String!
     capacity: Int!
     scale: capacityScaleType!
-    rs: String!
+    rs: Rs!
     owner: String!
     createdAt: String!
     updatedAt: String!

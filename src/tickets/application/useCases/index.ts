@@ -1,4 +1,5 @@
 import type { User } from '@prisma/client'
+import { services } from '../../../service/domain/controllers.ts'
 import { raise } from '../../../shared/helpers/errors.ts'
 import { user } from '../../../user/domain/controllers.ts'
 import {
@@ -10,6 +11,12 @@ import {
 import type { TicketDTO } from '../../types/core/types.ts'
 import { findTicketById } from '../helpers/helpers.ts'
 
+/**
+ * Get all the tickets
+ *
+ * @returns All the tickets
+ */
+
 const getTickets = async () =>
   tickets({
     include: {
@@ -20,7 +27,39 @@ const getTickets = async () =>
   })
 
 /**
- * Returns the new ticket created
+ * Get the tickets by radio station
+ *
+ * @param rsId - the id of the radio station
+ * @returns The tickets by radio station
+ */
+
+const getTicketsByRs = async (rsId: string) => {
+  const service = await services({
+    where: { rsId }
+  })
+
+  const ticketsByRs = await tickets({
+    where: {
+      services: {
+        some: {
+          id: service[0].id
+        }
+      }
+    },
+    include: {
+      services: {
+        include: {
+          rs: true
+        }
+      }
+    }
+  })
+
+  return ticketsByRs
+}
+
+/**
+ * Create a new ticket
  *
  * @param args - the object with the data to create a new ticket
  * @returns The new ticket
@@ -179,6 +218,7 @@ export {
   editTicket,
   erraseTicket,
   getTickets,
+  getTicketsByRs,
   removeEditor
 }
 
