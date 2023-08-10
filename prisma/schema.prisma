@@ -1,5 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+  output = "../docs/database"
+}
 
 generator client {
   provider = "prisma-client-js"
@@ -104,7 +108,7 @@ model User {
   roleType       Role           @relation(fields: [role], references: [name])
   role           RoleType
   department     Department     @relation(fields: [departmentName], references: [name])
-  departmentName DepartmentType
+  departmentName DepartmentType 
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
   tickets        Ticket[]       @relation("createdTickets")
@@ -151,7 +155,7 @@ model Service {
   code      String
   capacity  Int
   scale     capacityScaleType @default(MBPS)
-  rs        Rs                @relation(fields: [rsId], references: [id])
+  rs        RadioStation      @relation(fields: [rsId], references: [id])
   rsId      String            @default("1")
   owner     Client            @relation(fields: [ownerId], references: [id])
   ownerId   String
@@ -172,7 +176,7 @@ model Client {
   updatedAt DateTime  @updatedAt
 }
 
-model Rs {
+model RadioStation {
   id            String      @id @default(uuid())
   name          String
   code          String
@@ -191,5 +195,5 @@ model Coordinates {
   longitude String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  rs        Rs?
+  rs        RadioStation?
 }
