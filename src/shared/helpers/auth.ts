@@ -1,7 +1,7 @@
+import { Role } from '@shared/types/core/types'
+import { user } from '@user/domain/controllers'
 import jwt from 'jsonwebtoken'
-import { user } from '../../user/domain/controllers.ts'
-import { Role } from '../types/core/types.ts'
-import { raise } from './errors.ts'
+import { raise } from './errors'
 
 const verifyToken = (token: string) =>
   jwt.verify(token, process.env.SECRET_KEY || 'secret')
@@ -14,7 +14,7 @@ const grantUser = async (token: string, role: Role) => {
   if (!currentUser) throw new Error('User not found')
 
   if (currentUser?.role !== role) {
-    raise('Error', 'Not authorized')
+    raise('Auth', 'Not authorized')
   }
 
   return currentUser

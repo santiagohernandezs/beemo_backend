@@ -1,4 +1,4 @@
-import { newService, services } from '../../domain/controllers.ts'
+import { newService, services } from '@service/domain/controllers'
 
 const getServices = async () => {
   return await services({
@@ -18,4 +18,3 @@ const createService = async args => {
 }
 
 export { createService, getServices }
-

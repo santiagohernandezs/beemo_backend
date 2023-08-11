@@ -1,5 +1,5 @@
-import ticketMiddlewares from '../../tickets/infrastructure/middlewares/middlewares.ts'
-import userMiddlewares from '../../user/infrastructure/middlewares/middlewares.ts'
+import ticketMiddlewares from '@tickets/infrastructure/middlewares/middlewares'
+import userMiddlewares from '@user/infrastructure/middlewares/middlewares'
 
 const middlewares = [userMiddlewares, ticketMiddlewares]
 

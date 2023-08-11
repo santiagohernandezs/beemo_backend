@@ -4,10 +4,10 @@ import { makeExecutableSchema } from '@graphql-tools/schema'
 import { applyMiddleware } from 'graphql-middleware'
 import jwt from 'jsonwebtoken'
 
-import appMiddlewares from './graphql/middlewares/middlewares.ts'
-import appPlugins from './graphql/plugins/plugins.ts'
-import resolvers from './graphql/resolvers/index.ts'
-import typeDefs from './graphql/typedefs/index.ts'
+import appMiddlewares from '@graphql/middlewares/middlewares'
+import appPlugins from '@graphql/plugins/plugins'
+import resolvers from '@graphql/resolvers/resolvers'
+import typeDefs from '@graphql/typedefs/typedefs'
 
 const schema = makeExecutableSchema({
   typeDefs,
@@ -21,15 +21,18 @@ const server = new ApolloServer({
   plugins: [...appPlugins]
 })
 
-const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
-  context: async ({ req }) => {
-    const token = req.headers.authorization || ''
+const handler = async () => {
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: 4000 },
+    context: async ({ req }) => {
+      const token = req.headers.authorization || ''
 
-    const currentUser = jwt.decode(token)
+      const currentUser = jwt.decode(token)
 
-    return { token, currentUser }
-  }
-})
+      return { token, currentUser }
+    }
+  })
+  console.info(`Server ready at ${url}🚀`)
+}
 
-console.info(`Server ready at ${url}🚀`)
+handler()

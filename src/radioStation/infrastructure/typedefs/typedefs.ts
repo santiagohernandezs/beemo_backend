@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
-import inputs from './inputs/index.ts'
-import querys from './querys/index.ts'
+import inputs from './inputs/inputs'
+import querys from './queries/queries'
 
 const typeDefs = gql`
   ${inputs}

@@ -1,4 +1,4 @@
-import querys from './querys/index.ts'
+import querys from './queries/queries'
 
 const resolvers = {
   Query: querys

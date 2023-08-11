@@ -1,7 +1,7 @@
 import { Ticket } from '@prisma/client'
-import { raise } from '../../../shared/helpers/errors.ts'
-import { ticket } from '../../domain/controllers.ts'
-import type { TicketData } from '../../types/core/types.ts'
+import { raise } from '@shared/helpers/errors'
+import { ticket } from '@tickets/domain/controllers'
+import type { TicketData } from '@tickets/types/core/types'
 
 /**
  * Find a ticket by id
@@ -29,10 +29,11 @@ const findTicketById = async (id: string) => {
   })
 
   if (!currentTicket) {
-    raise('Error', 'Ticket not found')
+    raise('Ticket', 'Ticket not found')
   }
 
   return currentTicket as TicketData
 }
 
 export { findTicketById }
+

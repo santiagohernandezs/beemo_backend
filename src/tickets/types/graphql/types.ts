@@ -1,5 +1,5 @@
-import type { GenericInput } from '../../../shared/types/core/types'
-import type { TicketDTO } from '../core/types'
+import type { GenericInput } from '@shared/types/core/types'
+import type { TicketDTO } from '@tickets/types/core/types'
 
 type CreateTicketInput = GenericInput<TicketDTO>
 type DeleteTicketInput = GenericInput<{ id: string }>
@@ -19,4 +19,3 @@ export type {
   UpdateEditorInput,
   UpdateTicketInput
 }
-

@@ -1,16 +1,17 @@
+import prisma from '@db/connection'
 import type { Prisma } from '@prisma/client'
-import prisma from '../../db/connection.ts'
+import { raise } from '@shared/helpers/errors'
 
-const services = async (args?: Prisma.ServiceFindManyArgs) => {
-  return await prisma.service.findMany(args)
-}
+const services = async (args: Prisma.ServiceFindManyArgs) =>
+  await prisma.service
+    .findMany(args)
+    .catch(err => raise('Service', 'Cannot find services', err))
+    .finally(async () => await prisma.$disconnect())
 
-const newService = async args => {
-  return await prisma.service.create({
-    data: {
-      ...args.input
-    }
-  })
-}
+const newService = async (args: Prisma.ServiceCreateArgs) =>
+  await prisma.service
+    .create(args)
+    .catch(err => raise('Service', 'Cannot create service', err))
+    .finally(async () => await prisma.$disconnect())
 
 export { newService, services }

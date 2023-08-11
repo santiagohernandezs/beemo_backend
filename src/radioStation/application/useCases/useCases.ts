@@ -1,5 +1,5 @@
-import { rs } from '../../domain/controllers.ts'
+import { radioStation } from '@radioStation/domain/controllers'
 
-const getRs = async id => await rs({ where: { id } })
+const getRs = async id => await radioStation({ where: { id } })
 
 export { getRs }

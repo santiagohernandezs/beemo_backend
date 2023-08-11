@@ -1,5 +1,5 @@
-import mutations from './mutations/index.ts'
-import querys from './querys/index.ts'
+import mutations from './mutations/mutations'
+import querys from './queries/queries'
 
 const resolvers = {
   Query: querys,

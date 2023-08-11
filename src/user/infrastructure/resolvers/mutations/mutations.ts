@@ -1,5 +1,5 @@
-import { createUser, loginUser } from '../../../application/useCases/index.ts'
-import type { CreateUserInput, LoginUserInput } from '../../../types/core/types.ts'
+import { createUser, loginUser } from '@user/application/useCases/useCases'
+import type { CreateUserInput, LoginUserInput } from '@user/types/core/types'
 
 const Mutation = {
   createUser: async (_: unknown, args: CreateUserInput) => createUser(args.input),

@@ -1,6 +1,6 @@
 import type { Ticket, User } from '@prisma/client'
-import type { Service } from '../../../service/types/core/types.ts'
-import type { Failure, Severity, Status, Tag } from '../../../shared/types/core/types.ts'
+import type { Service } from '@service/types/core/types'
+import type { Failure, Severity, Status, Tag } from '@shared/types/core/types'
 
 type TicketDTO = {
   title: string

@@ -1,7 +1,7 @@
+import { raise } from '@shared/helpers/errors'
+import { newUser, user, users } from '@user/domain/controllers'
+import type { UserDTO } from '@user/types/core/types'
 import jwt from 'jsonwebtoken'
-import { raise } from '../../../shared/helpers/errors.ts'
-import { newUser, user, users } from '../../domain/controllers.ts'
-import type { UserDTO } from '../../types/core/types.ts'
 
 const createUser = async (args: UserDTO) =>
   newUser({
@@ -22,8 +22,8 @@ const loginUser = async (args: Pick<UserDTO, 'email' | 'password'>) => {
 
   const currentUser = await user({ where: { email } })
 
-  if (!currentUser) raise('Error', 'User not found')
-  if (currentUser?.password !== password) raise('Error', 'Password not match')
+  if (!currentUser) raise('User', 'User not found')
+  if (currentUser?.password !== password) raise('Auth', 'Password not match')
 
   const userToken = jwt.sign(
     {

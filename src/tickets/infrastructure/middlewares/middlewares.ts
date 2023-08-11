@@ -1,6 +1,6 @@
-import { grantUser } from '../../../shared/helpers/auth.ts'
-import { Context } from '../../../shared/types/graphql/types.ts'
-import { DeleteTicketInput } from '../../types/graphql/types.ts'
+import { grantUser } from '@shared/helpers/auth'
+import { Context } from '@shared/types/graphql/types'
+import { DeleteTicketInput } from '@tickets/types/graphql/types'
 
 const middlewares = {
   Mutation: {

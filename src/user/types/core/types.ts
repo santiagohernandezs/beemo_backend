@@ -1,4 +1,4 @@
-import type { Department, GenericInput, Role } from '../../../shared/types/core/types'
+import type { Department, GenericInput, Role } from '@shared/types/core/types'
 
 type UserDTO = {
   name: string
@@ -14,4 +14,3 @@ type FindUserById = GenericInput<{ id: string }>
 type LoginUserInput = GenericInput<Pick<UserDTO, 'email' | 'password'>>
 
 export type { CreateUserInput, FindUserById, LoginUserInput, UserDTO }
-

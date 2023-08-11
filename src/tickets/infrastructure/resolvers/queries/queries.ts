@@ -1,5 +1,5 @@
-import { getTickets, getTicketsByRs } from '../../../application/useCases/index.ts'
-import { FindTicketByRs } from '../../../types/graphql/types.ts'
+import { getTickets, getTicketsByRs } from '@tickets/application/useCases/useCases'
+import { FindTicketByRs } from '@tickets/types/graphql/types'
 
 export const Query = {
   tickets: async () => await getTickets(),

@@ -4,14 +4,14 @@ import {
   createTicket,
   editTicket,
   erraseTicket
-} from '../../../application/useCases/index.ts'
+} from '@tickets/application/useCases/useCases'
 import type {
   CloseTicketInput,
   CreateTicketInput,
   DeleteTicketInput,
   UpdateEditorInput,
   UpdateTicketInput
-} from '../../../types/graphql/types.ts'
+} from '@tickets/types/graphql/types'
 
 export const Mutation = {
   createTicket: async (_: unknown, args: CreateTicketInput) =>

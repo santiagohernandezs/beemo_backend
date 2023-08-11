@@ -1,15 +1,15 @@
 import type { User } from '@prisma/client'
-import { services } from '../../../service/domain/controllers.ts'
-import { raise } from '../../../shared/helpers/errors.ts'
-import { user } from '../../../user/domain/controllers.ts'
+import { services } from '@service/domain/controllers'
+import { raise } from '@shared/helpers/errors'
+import { findTicketById } from '@tickets/application/helpers/helpers'
 import {
   deleteTicket,
   newTicket,
   tickets,
   updateTicket
-} from '../../domain/controllers.ts'
-import type { TicketDTO } from '../../types/core/types.ts'
-import { findTicketById } from '../helpers/helpers.ts'
+} from '@tickets/domain/controllers'
+import type { TicketDTO } from '@tickets/types/core/types'
+import { user } from '@user/domain/controllers'
 
 /**
  * Get all the tickets
@@ -71,7 +71,7 @@ const createTicket = async (args: TicketDTO) => {
   })
 
   if (!currentUser) {
-    raise('Error', 'User not found')
+    raise('User', 'User not found')
   }
 
   return await newTicket({
