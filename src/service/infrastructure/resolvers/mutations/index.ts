@@ -1,7 +1,7 @@
-import { createService } from '../../../application/useCases/index.ts'
+import { createService } from '@service/application/useCases/useCases'
 
 const Mutation = {
-  createService: async (_, args) => createService(args.input)
+  createService: async (_, args) => await createService(args.input)
 }
 
 export default Mutation

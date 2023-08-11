@@ -1,7 +1,7 @@
-import { getServices } from '../../../application/useCases/index.ts'
+import { getServices } from '@service/application/useCases/useCases'
 
 const Query = {
-  services: async () => getServices()
+  services: async () => await getServices()
 }
 
 export default Query

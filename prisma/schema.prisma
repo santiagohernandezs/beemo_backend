@@ -1,5 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+  output = "../docs/database"
+}
 
 generator client {
   provider = "prisma-client-js"
@@ -32,6 +36,7 @@ enum StatusType {
   IN_PROGRESS
   RESOLVED
   CLOSED
+  WAITING
 }
 
 enum ServiceType {
@@ -59,18 +64,62 @@ enum severityType {
   Minor
 }
 
+enum tagType {
+  AP
+  PTP
+  CP
+  Electrical
+  Frequency
+  Hardware
+  Software
+  Critical
+  Major
+  Minor
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+  IT
+  SUPPORT
+  NOC
+  HR
+  FINANCE
+  MARKETING
+  SALES
+  CUSTOMER_SERVICE
+  MBPS
+  GBPS
+  TBPS
+}
+
+enum Permission {
+  READ
+  WRITE
+  UPDATE
+  DELETE
+}
+
 model User {
   id             String         @id @default(uuid())
   name           String
   lastname       String
   email          String         @unique
   password       String
-  role           RoleType       @default(USER)
+  roleType       Role           @relation(fields: [role], references: [name])
+  role           RoleType
   department     Department     @relation(fields: [departmentName], references: [name])
-  departmentName DepartmentType
+  departmentName DepartmentType 
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
-  tickets        Ticket[]
+  tickets        Ticket[]       @relation("createdTickets")
+  editedTickets  Ticket[]
+}
+
+model Role {
+  id          String       @id @default(uuid())
+  name        RoleType     @unique
+  permissions Permission[]
+  User        User[]
 }
 
 model Department {
@@ -82,18 +131,21 @@ model Department {
 }
 
 model Ticket {
-  id        String       @id @default(uuid())
-  title     String
-  content   String
-  type      failureType  @default(Electrical)
-  severity  severityType @default(Minor)
-  startDate DateTime?     @default(now())
-  endDate   DateTime?
-  services  Service[]
-  authors   User[]
-  status    StatusType   @default(OPEN)
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  id          String       @id @default(uuid())
+  title       String
+  content     String
+  type        failureType  @default(Electrical)
+  severity    severityType @default(Minor)
+  tags        tagType[]
+  services    Service[]
+  author      User         @relation("createdTickets", fields: [authorId], references: [id])
+  authorId    String
+  editors     User[]
+  status      StatusType   @default(OPEN)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  closedAt    DateTime?
+  timeToClose Int?         @default(0)
 }
 
 model Service {
@@ -103,7 +155,8 @@ model Service {
   code      String
   capacity  Int
   scale     capacityScaleType @default(MBPS)
-  rs        String
+  rs        RadioStation      @relation(fields: [rsId], references: [id])
+  rsId      String            @default("1")
   owner     Client            @relation(fields: [ownerId], references: [id])
   ownerId   String
   createdAt DateTime          @default(now())
@@ -123,15 +176,7 @@ model Client {
   updatedAt DateTime  @updatedAt
 }
 
-model Rs {
-  id        String   @id @default(uuid())
-  name      String
-  code      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Location {
+model RadioStation {
   id            String      @id @default(uuid())
   name          String
   code          String
@@ -139,15 +184,16 @@ model Location {
   municipality  String
   coordinates   Coordinates @relation(fields: [coordinatesId], references: [id])
   coordinatesId String      @unique
+  services      Service[]
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 }
 
 model Coordinates {
-  id        String    @id @default(uuid())
+  id        String   @id @default(uuid())
   latitude  String
   longitude String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  Location  Location?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  rs        RadioStation?
 }

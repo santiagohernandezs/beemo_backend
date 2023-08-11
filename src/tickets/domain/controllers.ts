@@ -1,73 +1,35 @@
-import prisma from '../../db/connection.ts'
+import prisma from '@db/connection'
+import type { Prisma } from '@prisma/client'
+import { raise } from '@shared/helpers/errors'
 
-const tickets = async () => {
-  return await prisma.ticket.findMany({
-    include: {
-      authors: true,
-      services: true
-    }
-  })
-}
+const tickets = async (args: Prisma.TicketFindManyArgs) =>
+  await prisma.ticket
+    .findMany(args)
+    .catch(err => raise('Ticket', 'Cannot find tickets', err))
+    .finally(async () => await prisma.$disconnect())
 
-const newTicket = async args => {
-  return await prisma.ticket.create({
-    data: {
-      ...args.input,
-      authors: {
-        connect: args.input.authors.map(author => ({ id: author.id }))
-      },
-      services: {
-        connect: args.input.services.map(service => ({ id: service.id }))
-      }
-    },
-    include: {
-      authors: true
-    }
-  })
-}
+const newTicket = async (args: Prisma.TicketCreateArgs) =>
+  await prisma.ticket
+    .create(args)
+    .catch(err => raise('Ticket', 'Cannot create ticket', err))
+    .finally(async () => await prisma.$disconnect())
 
-const ticketById = async id => {
-  return await prisma.ticket.findUnique({
-    where: {
-      id
-    }
-  })
-}
+const ticket = async (args: Prisma.TicketFindUniqueArgs) =>
+  await prisma.ticket
+    .findUnique(args)
+    .catch(err => raise('Ticket', 'Cannot find ticket', err))
+    .finally(async () => await prisma.$disconnect())
 
-const deleteTicket = async id => {
-  return await prisma.ticket.delete({
-    where: {
-      id
-    }
-  })
-}
+const deleteTicket = async (args: Prisma.TicketDeleteArgs) =>
+  await prisma.ticket
+    .delete(args)
+    .catch(err => raise('Ticket', 'Cannot delete ticket', err))
+    .finally(async () => await prisma.$disconnect())
 
-const newAuthor = async args => {
-  return await prisma.ticket.update({
-    where: {
-      id: args.input.id
-    },
-    data: {
-      ...args.input,
-      authors: {
-        connect: args.input.authors.map(author => ({ id: author.id }))
-      }
-    }
-  })
-}
+const updateTicket = async (args: Prisma.TicketUpdateArgs) =>
+  await prisma.ticket
+    .update(args)
+    .catch(err => raise('Ticket', 'Cannot update ticket', err))
+    .finally(async () => await prisma.$disconnect())
 
-const deleteAuthor = async args => {
-  return await prisma.ticket.update({
-    where: {
-      id: args.input.id
-    },
-    data: {
-      ...args.input,
-      authors: {
-        disconnect: args.input.authors.map(author => ({ id: author.id }))
-      }
-    }
-  })
-}
-
-export { deleteAuthor, deleteTicket, newAuthor, newTicket, ticketById, tickets }
+export { deleteTicket, newTicket, ticket, tickets, updateTicket }

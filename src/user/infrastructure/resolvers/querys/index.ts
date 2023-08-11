@@ -1,5 +1,5 @@
-import { getUserById, getUsers } from '../../../application/useCases/index.ts'
-import type { FindUserById } from '../../../types/core/types.ts'
+import { getUserById, getUsers } from '@user/application/useCases/useCases'
+import type { FindUserById } from '@user/types/core/types'
 
 const Query = {
   users: async () => await getUsers(),

@@ -1,21 +1,35 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "module": "esnext",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
+    "target": "ES2022",
+    "module": "NodeNext", // Como funciona el sistema de modulos
+    "moduleResolution": "Node", // Como node resive los modulos
+    "outDir": "./build",
+    "rootDir": "./src",
     "strict": true,
-    "noEmit": true,
-    "skipDefaultLibCheck": true,
-    "allowImportingTsExtensions": true,
     "noImplicitAny": false,
-    "rootDirs": ["src"],
-    "outDir": "dist",
-    "lib": ["es2020"],
-    "types": ["node"],
-    "rootDir": "src"
+    "esModuleInterop": true,
+    "allowJs": true,
+    "baseUrl": "./",
+    "pretty": true,
+    // "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "emitDecoratorMetadata": true,
+    "paths": {
+      "@user/*": ["src/user/*"],
+      "@tickets/*": ["src/tickets/*"],
+      "@service/*": ["src/service/*"],
+      "@radioStation/*": ["src/radioStation/*"],
+      "@department/*": ["src/department/*"],
+      "@shared/*": ["src/shared/*"],
+      "@graphql/*": ["src/graphql/*"],
+      "@db/*": ["src/db/*"]
+    }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["./src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
