@@ -12,7 +12,7 @@
     "format:write": "prettier --write .",
     "format:prisma": "npx prisma format --schema=./prisma/schema.prisma",
     "studio": "pnpm dlx prisma studio",
-    "migrate:dev": "npx prisma migrate dev --name init && npx prisma generate && npx prisma studio",
+    "migrate:dev": "npx prisma migrate dev && npx prisma generate",
     "migrate:reset": "npx prisma migrate reset",
     "compose": "docker-compose up -d",
     "lint": "eslint --ext .ts src/ --fix",

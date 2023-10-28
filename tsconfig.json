@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext", // Como funciona el sistema de modulos
+    "module": "ES2022", // Como funciona el sistema de modulos
     "moduleResolution": "Node", // Como node resive los modulos
     "outDir": "./build",
-    "rootDir": "./src",
+    "rootDir": "./",
     "strict": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
@@ -30,6 +30,6 @@
       "@db/*": ["src/db/*"]
     }
   },
-  "include": ["./src/**/*.ts"],
+  "include": ["./src/**/*.ts", "./utils/**/*.ts"],
   "exclude": ["node_modules"]
 }
