@@ -6,6 +6,8 @@ type User =
   | 'User already exists'
   | 'Cannot find users'
   | 'Cannot find user'
+  | 'Cannot delete user'
+  | 'Cannot update user'
 
 type Ticket =
   | 'Ticket not found'

@@ -20,4 +20,17 @@ const user = async (args: Prisma.UserFindUniqueArgs) =>
     .catch(err => raise('User', 'Cannot find user', err))
     .finally(async () => await prisma.$disconnect())
 
-export { newUser, user, users }
+const deletedUser = async (args: Prisma.UserDeleteArgs) =>
+  await prisma.user
+    .delete(args)
+    .catch(err => raise('User', 'Cannot delete user', err))
+    .finally(async () => await prisma.$disconnect())
+
+const updatedUser = async (args: Prisma.UserUpdateArgs) =>
+  await prisma.user
+    .update(args)
+    .catch(err => raise('User', 'Cannot update user', err))
+    .finally(async () => await prisma.$disconnect())
+
+export { deletedUser, newUser, updatedUser, user, users }
+
