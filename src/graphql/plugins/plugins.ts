@@ -4,25 +4,17 @@ const plugins: ApolloServerPlugin[] = [
   {
     serverWillStart: async () => {
       console.info('Server starting up!')
+    },
+    invalidRequestWasReceived: async () => {
+      console.info('Invalid request!')
+    },
+    requestDidStart: async () => {
+      console.info('Request starting!')
+    },
+    startupDidFail: async () => {
+      console.info('Server failed to start!')
     }
   }
-  // {
-  //   requestDidStart: async ({ request }) => {
-  //     const token = request?.http?.headers.get('authorization') ?? ''
-
-  //     if (!token) {
-  //       return
-  //     }
-
-  //     const currentUser = await user({ where: { id: token } })
-
-  //     if (!currentUser) {
-  //       return
-  //     }
-
-  //     return {}
-  //   }
-  // },
 ]
 
 export default plugins

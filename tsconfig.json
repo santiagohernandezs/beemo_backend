@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "ES2022", // Como funciona el sistema de modulos
+    "target": "ESNext",
+    "module": "CommonJS", // Como funciona el sistema de modulos
     "moduleResolution": "Node", // Como node resive los modulos
     "outDir": "./build",
     "rootDir": "./",

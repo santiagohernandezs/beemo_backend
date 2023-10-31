@@ -1,16 +1,35 @@
 import type { Department, GenericInput, Role } from '@shared/types/core/types'
+import type { TicketDTO as Ticket } from '@tickets/types/core/types'
 
-type UserDTO = {
+type User = {
+  id: string
   name: string
   lastname: string
   email: string
   password: string
   role: Role
   departmentName: Department
+  createdAt: string
+  updatedAt: string
+  tickets: Ticket[]
 }
 
+type UserDTO = Pick<
+  User,
+  'name' | 'lastname' | 'email' | 'password' | 'role' | 'departmentName'
+>
+
+type FindUserById = GenericInput<Pick<User, 'id'>>
+type RemoveUserInput = GenericInput<Pick<User, 'id'>>
 type CreateUserInput = GenericInput<UserDTO>
-type FindUserById = GenericInput<{ id: string }>
 type LoginUserInput = GenericInput<Pick<UserDTO, 'email' | 'password'>>
 
-export type { CreateUserInput, FindUserById, LoginUserInput, UserDTO }
+export type {
+  CreateUserInput,
+  FindUserById,
+  LoginUserInput,
+  RemoveUserInput,
+  User,
+  UserDTO
+}
+

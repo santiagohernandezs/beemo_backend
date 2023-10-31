@@ -14,6 +14,10 @@ const inputs = gql`
     id: String!
   }
 
+  input RemoveUserInput {
+    id: String!
+  }
+
   input LoginUserInput {
     email: String!
     password: String!
