@@ -1,7 +1,7 @@
 import type { User } from '@prisma/client'
 import { services } from '@service/domain/controllers'
 import { raise } from '@shared/helpers/errors'
-import { findTicketById } from '@tickets/application/helpers/helpers'
+import { findTicketById } from '@tickets/application/helpers'
 import {
   deleteTicket,
   newTicket,
@@ -199,7 +199,7 @@ const closeTicket = async (id: string) => {
   const ticket = await findTicketById(id)
 
   const timeToClose = Math.abs(Date.now() - ticket.createdAt.getTime())
-  const timeToCloseInDays = Math.ceil(timeToClose / (1000 * 60 * 60 * 24))
+  const timeToCloseInDays = Math.ceil(timeToClose / (1000 * 60 * 60 * 24)) // 1000 * 60 * 60 * 24 = 1 day
 
   return await updateTicket({
     where: { id: ticket.id },
@@ -221,4 +221,3 @@ export {
   getTicketsByRs,
   removeEditor
 }
-

@@ -1,5 +1,5 @@
-import mutations from './mutations/mutations'
-import querys from './queries/queries'
+import mutations from './mutations'
+import querys from './queries'
 
 const resolvers = {
   Query: querys,

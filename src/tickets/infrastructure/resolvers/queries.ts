@@ -1,4 +1,4 @@
-import { getTickets, getTicketsByRs } from '@tickets/application/useCases/useCases'
+import { getTickets, getTicketsByRs } from '@tickets/application/useCases'
 import { FindTicketByRs } from '@tickets/types/graphql/types'
 
 export const Query = {

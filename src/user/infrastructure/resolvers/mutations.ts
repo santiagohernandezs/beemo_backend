@@ -1,4 +1,4 @@
-import { createUser, loginUser, removeUser } from '@user/application/useCases/useCases'
+import { createUser, loginUser, removeUser } from '@user/application/useCases'
 import type {
   CreateUserInput,
   LoginUserInput,

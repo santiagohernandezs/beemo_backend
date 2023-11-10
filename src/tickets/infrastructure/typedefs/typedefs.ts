@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import inputs from './inputs/inputs'
-import mutations from './mutations/mutations'
-import querys from './queries/queries'
+import inputs from './inputs'
+import mutations from './mutations'
+import querys from './queries'
 
 const typeDefs = gql`
   enum failureType {

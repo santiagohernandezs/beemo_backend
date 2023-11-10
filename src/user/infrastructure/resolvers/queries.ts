@@ -1,4 +1,4 @@
-import { getUserById, getUsers } from '@user/application/useCases/useCases'
+import { getUserById, getUsers } from '@user/application/useCases'
 import type { FindUserById } from '@user/types/core/types'
 
 const Query = {

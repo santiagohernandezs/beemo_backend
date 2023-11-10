@@ -4,7 +4,7 @@ import {
   createTicket,
   editTicket,
   erraseTicket
-} from '@tickets/application/useCases/useCases'
+} from '@tickets/application/useCases'
 import type {
   CloseTicketInput,
   CreateTicketInput,
