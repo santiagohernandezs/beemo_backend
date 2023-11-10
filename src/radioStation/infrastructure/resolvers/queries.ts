@@ -1,4 +1,4 @@
-import { getRs } from '@radioStation/application/useCases/useCases'
+import { getRs } from '@radioStation/application/useCases'
 
 type FindRsByIdInput = {
   input: {
