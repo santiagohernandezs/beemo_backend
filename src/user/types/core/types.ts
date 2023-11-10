@@ -3,8 +3,8 @@ import type { TicketDTO as Ticket } from '@tickets/types/core/types'
 
 type User = {
   id: string
-  name: string
-  lastname: string
+  firstName: string
+  lastName: string
   email: string
   password: string
   role: Role
@@ -16,7 +16,7 @@ type User = {
 
 type UserDTO = Pick<
   User,
-  'name' | 'lastname' | 'email' | 'password' | 'role' | 'departmentName'
+  'firstName' | 'lastName' | 'email' | 'password' | 'role' | 'departmentName'
 >
 
 type FindUserById = GenericInput<Pick<User, 'id'>>

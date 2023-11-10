@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import inputs from './inputs/inputs'
-import mutations from './mutations/mutations'
-import queries from './queries/queries'
+import inputs from './inputs'
+import mutations from './mutations'
+import queries from './queries'
 
 const typeDefs = gql`
   enum Role {
@@ -25,8 +25,8 @@ const typeDefs = gql`
 
   type User {
     id: String!
-    name: String!
-    lastname: String!
+    firstName: String!
+    lastName: String!
     email: String!
     password: String!
     role: Role!

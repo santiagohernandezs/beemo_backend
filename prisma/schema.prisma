@@ -101,8 +101,8 @@ enum Permission {
 
 model User {
   id             String         @id @default(uuid())
-  name           String
-  lastname       String
+  firstName           String
+  lastName       String
   email          String         @unique
   password       String
   roleType       Role           @relation(fields: [role], references: [name])
