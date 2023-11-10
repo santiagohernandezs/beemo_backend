@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import inputs from '../inputs/inputs'
+import inputs from './inputs'
 
 const mutations = gql`
   ${inputs}

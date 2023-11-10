@@ -1,4 +1,4 @@
-import { createService } from '@service/application/useCases/useCases'
+import { createService } from '@service/application/useCases'
 
 const Mutation = {
   createService: async (_, args) => await createService(args.input)

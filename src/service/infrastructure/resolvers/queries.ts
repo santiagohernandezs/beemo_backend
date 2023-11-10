@@ -1,4 +1,4 @@
-import { getServices } from '@service/application/useCases/useCases'
+import { getServices } from '@service/application/useCases'
 
 const Query = {
   services: async () => await getServices()
