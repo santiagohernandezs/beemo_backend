@@ -17,7 +17,7 @@
     "compose": "docker-compose up -d",
     "lint": "eslint --ext .ts src/ --fix",
     "getready": "pnpm install && pnpm compose && pnpm migrate:dev && pnpm studio",
-    "tsdoc": "npx tsdoc tsdoc.json"
+    "doc": "jsdoc -c jsdoc.conf.json "
   },
   "keywords": [],
   "author": "",
