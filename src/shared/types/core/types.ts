@@ -47,4 +47,9 @@ type Failure = 'Electrical' | 'Frequency' | 'Hardware' | 'Software'
 
 type Status = 'OPEN' | 'IN_PROGRESS' | 'RESOLVED' | 'CLOSED'
 
-export type { Department, Failure, GenericInput, Role, Severity, Status, Tag }
+type ResolverParams = (_: unknown, args: any, context?: any, info?: any) => any
+
+type Resolver = Record<string, Record<string, ResolverParams>>
+
+export type { Department, Failure, GenericInput, Resolver, ResolverParams, Role, Severity, Status, Tag }
+
