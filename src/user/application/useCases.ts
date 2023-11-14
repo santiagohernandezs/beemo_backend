@@ -12,7 +12,7 @@ import jwt from 'jsonwebtoken'
  */
 
 const createUser = async (args: UserDTO): Promise<User> =>
-  newUser({
+  await newUser({
     data: {
       ...args
     }
@@ -25,7 +25,7 @@ const createUser = async (args: UserDTO): Promise<User> =>
  */
 
 const getUsers = async (): Promise<User[]> =>
-  users({
+  await users({
     include: {
       tickets: true
     }
@@ -82,3 +82,4 @@ const getUserById = async (id: string): Promise<User | null> => await user({ whe
 const removeUser = async (id: string): Promise<User> => await deletedUser({ where: { id } })
 
 export { createUser, getUserById, getUsers, loginUser, removeUser }
+
