@@ -10,7 +10,6 @@ import type { TicketData } from '@tickets/types/core/types'
  * @throws {Error} - if the ticket is not found
  * @returns The ticket found
  */
-
 const findTicketById = async (id: string) => {
   const currentTicket: Ticket | null = await ticket({
     where: { id },

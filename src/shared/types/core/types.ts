@@ -47,7 +47,7 @@ type Failure = 'Electrical' | 'Frequency' | 'Hardware' | 'Software'
 
 type Status = 'OPEN' | 'IN_PROGRESS' | 'RESOLVED' | 'CLOSED'
 
-type ResolverParams = (_: unknown, args: any, context?: any, info?: any) => any
+type ResolverParams = (root: unknown, args: any, context?: any, info?: any) => any
 
 type Resolver = Record<string, Record<string, ResolverParams>>
 

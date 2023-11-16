@@ -1,18 +1,22 @@
 import gql from 'graphql-tag'
 
 const inputs = gql`
+  "Input para referenciar un usuario."
   input referenceUserInput {
     id: String
   }
 
+  "Input para referenciar un servicio."
   input referenceServiceInput {
     id: String
   }
 
+  "Input para buscar un ticket por su Rs."
   input FindTicketByRs {
     id: String!
   }
 
+  "Input para crear un ticket."
   input CreateTicketInput {
     title: String
     content: String
@@ -25,10 +29,12 @@ const inputs = gql`
     endDate: String
   }
 
+  "Input para eliminar un ticket."
   input DeleteTicketInput {
     id: String!
   }
 
+  "Input para actualizar un ticket."
   input UpdateTicketInput {
     id: String!
     title: String
@@ -40,11 +46,13 @@ const inputs = gql`
     tags: [Tag]
   }
 
+  "Input para agregar un editor a un ticket."
   input AddEditorInput {
     id: String!
     editor: referenceUserInput!
   }
 
+  "Input para cerrar un ticket."
   input CloseTicketInput {
     id: String!
   }
