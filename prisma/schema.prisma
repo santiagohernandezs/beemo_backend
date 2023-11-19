@@ -109,8 +109,8 @@ model User {
   role           RoleType
   department     Department     @relation(fields: [departmentName], references: [name])
   departmentName DepartmentType 
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
+  createdAt      DateTime?      @default(now())
+  updatedAt      DateTime?      @updatedAt
   tickets        Ticket[]       @relation("createdTickets")
   editedTickets  Ticket[]
 }
