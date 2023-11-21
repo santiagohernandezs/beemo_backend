@@ -22,7 +22,13 @@ const getTickets = async () =>
     include: {
       author: true,
       services: true,
-      editors: true
+      editors: true,
+      comments: {
+        include: {
+          author: true,
+          ticket: true
+        }
+      }
     }
   })
 
@@ -211,7 +217,35 @@ const closeTicket = async (id: string) => {
   })
 }
 
+const addComment = async (args: { id: string; comment: string; user: string }) => {
+  const { id, comment, user } = args
+
+  const ticket = await findTicketById(id)
+
+  if (!ticket) {
+    raise('Ticket', 'Ticket not found')
+  }
+
+  const isFirstReply = ticket._count.comments === 0
+
+  return await updateTicket({
+    where: { id },
+    data: {
+      firstReply: isFirstReply ? new Date() : undefined,
+      comments: {
+        create: {
+          content: comment,
+          author: {
+            connect: { id: user }
+          }
+        }
+      }
+    }
+  })
+}
+
 export {
+  addComment,
   addEditor,
   closeTicket,
   createTicket,
@@ -221,3 +255,4 @@ export {
   getTicketsByRs,
   removeEditor
 }
+

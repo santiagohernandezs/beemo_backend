@@ -90,6 +90,22 @@ const typeDefs = gql`
 
   ${inputs}
 
+  "Definición de los comentarios de los tickets"
+  type Comment {
+    "Identificador del comentario"
+    id: String!
+    "Contenido del comentario"
+    content: String!
+    "Autor del comentario"
+    author: User
+    "Ticket al que pertenece el comentario"
+    ticket: Ticket!
+    "Fecha de creación del comentario"
+    createdAt: String!
+    "Fecha de actualización del comentario"
+    updatedAt: String!
+  }
+
   "Definición del tipo Ticket"
   type Ticket {
     "Identificador del ticket"
@@ -114,10 +130,14 @@ const typeDefs = gql`
     createdAt: String!
     "Fecha de actualización del ticket"
     updatedAt: String!
+    "Primer comentario del ticket"
+    firstReply: String!
     "Fecha de cierre del ticket"
     closedAt: String!
     "Hora de cierre del ticket"
     timeToClose: String!
+    "Comentarios del ticket"
+    comments: [Comment]!
   }
 
   ${querys}

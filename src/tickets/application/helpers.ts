@@ -23,6 +23,11 @@ const findTicketById = async (id: string) => {
         select: {
           id: true
         }
+      },
+      _count: {
+        select: {
+          comments: true
+        }
       }
     }
   })

@@ -7,10 +7,12 @@ type FindTicketById = GenericInput<{ id: string }>
 type UpdateEditorInput = GenericInput<{ id: string; editor: { id: string } }>
 type CloseTicketInput = GenericInput<{ id: string }>
 type UpdateTicketInput = GenericInput<{ id: string; data: Partial<TicketDTO> }>
+type AddCommentInput = GenericInput<{ id: string; comment: string; user: string }>
 
 type FindTicketByRs = GenericInput<{ id: string }>
 
 export type {
+  AddCommentInput,
   CloseTicketInput,
   CreateTicketInput,
   DeleteTicketInput,
@@ -19,3 +21,4 @@ export type {
   UpdateEditorInput,
   UpdateTicketInput
 }
+

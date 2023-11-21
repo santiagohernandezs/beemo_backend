@@ -56,6 +56,13 @@ const inputs = gql`
   input CloseTicketInput {
     id: String!
   }
+
+  "Input para agregar un comentario a un ticket."
+  input AddCommentInput {
+    id: String!
+    comment: String!
+    user: String!
+  }
 `
 
 export default inputs

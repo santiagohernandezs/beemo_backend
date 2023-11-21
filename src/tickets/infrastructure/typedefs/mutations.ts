@@ -13,6 +13,8 @@ const mutations = gql`
     closeTicket(input: CloseTicketInput!): Ticket!
     "Actualización de un ticket."
     updateTicket(input: UpdateTicketInput!): Ticket!
+    "Adición de un comentario a un ticket."
+    addTicketComment(input: AddCommentInput!): Ticket!
   }
 `
 

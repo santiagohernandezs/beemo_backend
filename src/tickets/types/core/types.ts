@@ -33,6 +33,9 @@ type TicketData = Ticket & {
   services: Service[]
   editors: User[]
   tags: User[]
+  _count: {
+    comments: number
+  }
 }
 
 export type { TicketDTO, TicketData, TicketModel }

@@ -113,6 +113,7 @@ model User {
   updatedAt      DateTime?      @updatedAt
   tickets        Ticket[]       @relation("createdTickets")
   editedTickets  Ticket[]
+  comments       Comment[]
 }
 
 model Role {
@@ -127,7 +128,7 @@ model Department {
   name      DepartmentType @unique
   users     User[]
   createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
+  updatedAt DateTime?       @updatedAt
 }
 
 model Ticket {
@@ -144,8 +145,21 @@ model Ticket {
   status      StatusType   @default(OPEN)
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
+  firstReply  DateTime?
   closedAt    DateTime?
   timeToClose Int?         @default(0)
+  comments    Comment[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id])
+  ticketId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model Service {
@@ -160,7 +174,7 @@ model Service {
   owner     Client            @relation(fields: [ownerId], references: [id])
   ownerId   String
   createdAt DateTime          @default(now())
-  updatedAt DateTime          @updatedAt
+  updatedAt DateTime?          @updatedAt
   tickets   Ticket[]
 }
 
@@ -173,7 +187,7 @@ model Client {
   address   String
   services  Service[]
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  updatedAt DateTime?  @updatedAt
 }
 
 model RadioStation {
@@ -186,7 +200,7 @@ model RadioStation {
   coordinatesId String      @unique
   services      Service[]
   createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  updatedAt     DateTime?    @updatedAt
 }
 
 model Coordinates {
@@ -194,6 +208,6 @@ model Coordinates {
   latitude  String
   longitude String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime? @updatedAt
   rs        RadioStation?
 }

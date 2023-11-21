@@ -1,7 +1,15 @@
 import { Ticket } from '@prisma/client'
 import { ResolverParams } from '@shared/types/core/types'
-import { addEditor, closeTicket, createTicket, editTicket, erraseTicket } from '@tickets/application/useCases'
+import {
+  addComment,
+  addEditor,
+  closeTicket,
+  createTicket,
+  editTicket,
+  erraseTicket
+} from '@tickets/application/useCases'
 import type {
+  AddCommentInput,
   CloseTicketInput,
   CreateTicketInput,
   DeleteTicketInput,
@@ -48,7 +56,13 @@ export const Mutation: Record<string, ResolverParams> = {
    *
    * @returns {Promise} Una promesa que se resuelve con el ticket actualizado.
    */
-  updateTicket: async (_: unknown, args: UpdateTicketInput): Promise<Ticket> => await editTicket(args.input)
+  updateTicket: async (_: unknown, args: UpdateTicketInput): Promise<Ticket> => await editTicket(args.input),
+  /**
+   * Mutación para agregar un comentario a un ticket.
+   *
+   * @returns {Promise} Una promesa que se resuelve con el ticket actualizado.
+   */
+  addTicketComment: async (_: unknown, args: AddCommentInput): Promise<Ticket> => await addComment(args.input)
 }
 
 export default Mutation

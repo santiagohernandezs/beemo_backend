@@ -27,7 +27,8 @@ const createUser = async (args: UserDTO): Promise<User> =>
 const getUsers = async (): Promise<User[]> =>
   await users({
     include: {
-      tickets: true
+      tickets: true,
+      comments: true
     }
   })
 
