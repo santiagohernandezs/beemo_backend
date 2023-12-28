@@ -1,8 +1,8 @@
 import type { User } from '@prisma/client'
+import { signToken } from '@shared/helpers/auth'
 import { raise } from '@shared/helpers/errors'
-import { deletedUser, newUser, user, users } from '@user/domain/controllers'
 import type { UserDTO } from '@user/types/core/types'
-import jwt from 'jsonwebtoken'
+import { _deleteUserById, _newUser, _userByEmail, _userById, _users } from './helpers'
 
 /**
  * Create a new user
@@ -11,12 +11,7 @@ import jwt from 'jsonwebtoken'
  * @returns The user created
  */
 
-const createUser = async (args: UserDTO): Promise<User> =>
-  await newUser({
-    data: {
-      ...args
-    }
-  })
+const createUser = async (args: UserDTO): Promise<User> => _newUser(args)
 
 /**
  * Get all the users
@@ -24,13 +19,7 @@ const createUser = async (args: UserDTO): Promise<User> =>
  * @returns The all users
  */
 
-const getUsers = async (): Promise<User[]> =>
-  await users({
-    include: {
-      tickets: true,
-      comments: true
-    }
-  })
+const getUsers = async (): Promise<User[]> => await _users()
 
 /**
  * Login user
@@ -42,22 +31,11 @@ const getUsers = async (): Promise<User[]> =>
 const loginUser = async (args: Pick<UserDTO, 'email' | 'password'>): Promise<{ token: string }> => {
   const { email, password } = args
 
-  const currentUser = (await user({ where: { email } })) as Pick<User, 'id' | 'password' | 'email'>
+  const currentUser = await _userByEmail(email)
 
-  if (!currentUser) raise('User', 'User not found')
   if (currentUser.password !== password) raise('Auth', 'Password not match')
 
-  const userToken = jwt.sign(
-    {
-      email: currentUser.email,
-      id: currentUser.id
-    },
-    process.env.SECRET_KEY || 'secret',
-    {
-      algorithm: 'HS256',
-      expiresIn: '12h'
-    }
-  )
+  const userToken = signToken(currentUser.id, currentUser.email)
 
   return {
     token: userToken
@@ -71,7 +49,7 @@ const loginUser = async (args: Pick<UserDTO, 'email' | 'password'>): Promise<{ t
  * @returns The user with the id passed
  */
 
-const getUserById = async (id: string): Promise<User | null> => await user({ where: { id } })
+const getUserById = async (id: string): Promise<User> => await _userById(id)
 
 /**
  * Remove user
@@ -80,7 +58,7 @@ const getUserById = async (id: string): Promise<User | null> => await user({ whe
  * @returns The user removed
  */
 
-const removeUser = async (id: string): Promise<User> => await deletedUser({ where: { id } })
+const removeUser = async (id: string): Promise<User> => await _deleteUserById(id)
 
 export { createUser, getUserById, getUsers, loginUser, removeUser }
 

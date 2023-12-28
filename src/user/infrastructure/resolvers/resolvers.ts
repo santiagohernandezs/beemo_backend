@@ -8,6 +8,7 @@ import userQuery from './queries'
  * @property {Object} Query - Objeto que contiene las consultas de usuario.
  * @property {Object} Mutation - Objeto que contiene las mutaciones de usuario.
  */
+
 const resolvers: Resolver = {
   Query: userQuery,
   Mutation: userMutation

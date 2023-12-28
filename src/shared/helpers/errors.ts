@@ -31,7 +31,7 @@ type RadioStation =
   | 'Cannot find radioStation'
   | 'Cannot delete radioStation'
 
-type Auth = 'Password not match' | 'Passwords are equals' | 'Not authorized'
+type Auth = 'Password not match' | 'Passwords are equals' | 'Not authorized' | 'Cannot sign token'
 
 type ErrorMessage<Scope extends string> = Scope extends 'User'
   ? User

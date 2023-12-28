@@ -11,7 +11,7 @@
     "allowJs": true,
     "baseUrl": "./",
     "pretty": true,
-    // "resolveJsonModule": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "noEmit": true,
     "forceConsistentCasingInFileNames": true,

@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 generator docs {
   provider = "node node_modules/prisma-docs-generator"
-  output = "../docs/database"
+  output   = "../docs/database"
 }
 
 generator client {
@@ -101,14 +101,14 @@ enum Permission {
 
 model User {
   id             String         @id @default(uuid())
-  firstName           String
+  firstName      String
   lastName       String
   email          String         @unique
   password       String
   roleType       Role           @relation(fields: [role], references: [name])
   role           RoleType
   department     Department     @relation(fields: [departmentName], references: [name])
-  departmentName DepartmentType 
+  departmentName DepartmentType
   createdAt      DateTime?      @default(now())
   updatedAt      DateTime?      @updatedAt
   tickets        Ticket[]       @relation("createdTickets")
@@ -128,7 +128,7 @@ model Department {
   name      DepartmentType @unique
   users     User[]
   createdAt DateTime       @default(now())
-  updatedAt DateTime?       @updatedAt
+  updatedAt DateTime?      @updatedAt
 }
 
 model Ticket {
@@ -152,13 +152,13 @@ model Ticket {
 }
 
 model Comment {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   content   String
-  author    User     @relation(fields: [authorId], references: [id])
+  author    User      @relation(fields: [authorId], references: [id])
   authorId  String
-  ticket    Ticket   @relation(fields: [ticketId], references: [id])
+  ticket    Ticket    @relation(fields: [ticketId], references: [id])
   ticketId  String
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }
 
@@ -174,7 +174,7 @@ model Service {
   owner     Client            @relation(fields: [ownerId], references: [id])
   ownerId   String
   createdAt DateTime          @default(now())
-  updatedAt DateTime?          @updatedAt
+  updatedAt DateTime?         @updatedAt
   tickets   Ticket[]
 }
 
@@ -187,7 +187,7 @@ model Client {
   address   String
   services  Service[]
   createdAt DateTime  @default(now())
-  updatedAt DateTime?  @updatedAt
+  updatedAt DateTime? @updatedAt
 }
 
 model RadioStation {
@@ -200,14 +200,14 @@ model RadioStation {
   coordinatesId String      @unique
   services      Service[]
   createdAt     DateTime    @default(now())
-  updatedAt     DateTime?    @updatedAt
+  updatedAt     DateTime?   @updatedAt
 }
 
 model Coordinates {
-  id        String   @id @default(uuid())
+  id        String        @id @default(uuid())
   latitude  String
   longitude String
-  createdAt DateTime @default(now())
-  updatedAt DateTime? @updatedAt
+  createdAt DateTime      @default(now())
+  updatedAt DateTime?     @updatedAt
   rs        RadioStation?
 }

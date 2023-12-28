@@ -90,7 +90,7 @@ const createTicket = async (args: TicketDTO) => {
         connect: args.services.map(service => ({ id: service.id }))
       },
       editors: {
-        connect: args.editor?.map(editor => ({ id: editor.id })) ?? []
+        connect: args.editors?.map(editor => ({ id: editor.id })) ?? []
       }
     }
   })
@@ -183,7 +183,7 @@ const editTicket = async (args: { id: string } & Partial<TicketDTO>) => {
         connect: args.services?.map(service => ({ id: service.id })) ?? []
       },
       editors: {
-        connect: args.editor?.map(editor => ({ id: editor.id })) ?? []
+        connect: args.editors?.map(editor => ({ id: editor.id })) ?? []
       },
       author: {
         connect: { id: args.author?.id ?? ticket.authorId }

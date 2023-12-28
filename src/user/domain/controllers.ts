@@ -26,7 +26,6 @@ const newUser = async (args: Prisma.UserCreateArgs): Promise<User> =>
  *
  * @example users({ where: { name: 'John' } }) // Find all users named John
  * @example users({ where: { role: 'ADMIN' } }) // Find all users with role ADMIN
- *
  */
 const users = async (args: Prisma.UserFindManyArgs): Promise<User[]> =>
   await prisma.user

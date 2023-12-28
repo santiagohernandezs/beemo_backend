@@ -31,7 +31,7 @@ const Mutation: Record<string, ResolverParams> = {
    * @param {LoginUserInput} args - Argumentos para iniciar sesión de un usuario.
    * @returns {Promise} Promesa que resuelve con el usuario logueado.
    */
-  loginUser: async (_: any, args: LoginUserInput): Promise<{ token: string }> => loginUser(args.input),
+  loginUser: async (_: unknown, args: LoginUserInput): Promise<{ token: string }> => loginUser(args.input),
 
   /**
    * Resolver para eliminar un usuario.

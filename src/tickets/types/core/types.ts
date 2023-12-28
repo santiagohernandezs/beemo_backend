@@ -1,42 +1,17 @@
-import type { Ticket, User } from '@prisma/client'
+import type { Ticket as ticket, User } from '@prisma/client'
 import type { Service } from '@service/types/core/types'
-import type { Failure, Severity, Status, Tag } from '@shared/types/core/types'
+import type { Tag } from '@shared/types/core/types'
 
-type TicketDTO = {
-  title: string
-  content: string
-  type: Failure
-  severity: Severity
-  author: User
-  editor?: User[]
-  services: Service[]
-  tags: Tag[]
-}
-
-type TicketModel = {
-  id: string
-  title: string
-  content: string
-  type: Severity
-  tags: Tag[]
-  services: Service[]
-  author: User
-  editor?: User[]
-  status: Status
-  createdAt: Date
-  updatedAt: Date
-  endDate?: Date
-  timeToClose?: number
-}
-
-type TicketData = Ticket & {
-  services: Service[]
+type Ticket = ticket & {
   editors: User[]
-  tags: User[]
+  author: User
+  services: Service[]
+  tags: Tag[]
   _count: {
     comments: number
   }
 }
 
-export type { TicketDTO, TicketData, TicketModel }
+type TicketDTO = Pick<Ticket, 'title' | 'content' | 'type' | 'severity' | 'author' | 'editors' | 'services' | 'tags'>
 
+export type { Ticket, TicketDTO }

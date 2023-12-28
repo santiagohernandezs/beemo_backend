@@ -1,35 +1,13 @@
-import type { Department, GenericInput, Role } from '@shared/types/core/types'
-import type { TicketDTO as Ticket } from '@tickets/types/core/types'
+import { User } from '@prisma/client'
+import type { GenericInput } from '@shared/types/core/types'
 
-type User = {
-  id: string
-  firstName: string
-  lastName: string
-  email: string
-  password: string
-  role: Role
-  departmentName: Department
-  createdAt: string
-  updatedAt: string
-  tickets: Ticket[]
-}
+type UserDTO = Pick<User, 'firstName' | 'lastName' | 'email' | 'password' | 'role' | 'departmentName'>
 
-type UserDTO = Pick<
-  User,
-  'firstName' | 'lastName' | 'email' | 'password' | 'role' | 'departmentName'
->
+type UserId = Pick<User, 'id'>
 
-type FindUserById = GenericInput<Pick<User, 'id'>>
-type RemoveUserInput = GenericInput<Pick<User, 'id'>>
+type FindUserById = GenericInput<UserId>
+type RemoveUserInput = GenericInput<UserId>
 type CreateUserInput = GenericInput<UserDTO>
 type LoginUserInput = GenericInput<Pick<UserDTO, 'email' | 'password'>>
 
-export type {
-  CreateUserInput,
-  FindUserById,
-  LoginUserInput,
-  RemoveUserInput,
-  User,
-  UserDTO
-}
-
+export type { CreateUserInput, FindUserById, LoginUserInput, RemoveUserInput, User, UserDTO }
