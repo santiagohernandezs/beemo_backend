@@ -1,13 +1,15 @@
 {
-	// See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
-	// Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
-
-	// List of extensions which should be recommended for users of this workspace.
-	"recommendations": [
-		
-	],
-	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
-	"unwantedRecommendations": [
-		
-	]
+  "recommendations": [
+    "eamodio.gitlens", // GitLens
+    "apollographql.vscode-apollo", // Apollo GraphQL
+    "aaron-bond.better-comments", // Better Comments
+    "EditorConfig.EditorConfig", // EditorConfig
+    "usernamehw.errorlens", // Error Lens
+    "GraphQL.vscode-graphql-syntax", // GraphQL
+    "yoavbls.pretty-ts-errors", // Pretty TS Errors
+    "Prisma.prisma", // Prisma
+    "esbenp.prettier-vscode", // Prettier
+    "adrianwilczynski.toggle-hidden" // Toggle Hidden Files
+  ],
+  "unwantedRecommendations": []
 }

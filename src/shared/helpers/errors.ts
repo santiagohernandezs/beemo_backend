@@ -6,6 +6,8 @@ type User =
   | 'User already exists'
   | 'Cannot find users'
   | 'Cannot find user'
+  | 'Cannot delete user'
+  | 'Cannot update user'
 
 type Ticket =
   | 'Ticket not found'
@@ -29,7 +31,7 @@ type RadioStation =
   | 'Cannot find radioStation'
   | 'Cannot delete radioStation'
 
-type Auth = 'Password not match' | 'Passwords are equals' | 'Not authorized'
+type Auth = 'Password not match' | 'Passwords are equals' | 'Not authorized' | 'Cannot sign token'
 
 type ErrorMessage<Scope extends string> = Scope extends 'User'
   ? User

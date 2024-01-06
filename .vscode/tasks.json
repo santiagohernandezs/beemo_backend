@@ -1,0 +1,97 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Prisma Format",
+      "type": "shell",
+      "command": "pnpm run format:prisma",
+      "group": {
+        "kind": "none",
+        "isDefault": true
+      },
+      "isBackground": true,
+      "promptOnClose": true,
+      "icon": {
+        "id": "code",
+        "color": "terminal.ansiGreen"
+      },
+      "presentation": {
+        "reveal": "never",
+        "revealProblems": "onProblem",
+        "showReuseMessage": true,
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Generate Docs",
+      "type": "shell",
+      "command": "pnpm run doc:generate",
+      "hide": true,
+      "group": {
+        "kind": "none",
+        "isDefault": true,
+        "order": 1
+      },
+      "icon": {
+        "id": "book",
+        "color": "terminal.ansiYellow"
+      },
+      "presentation": {
+        "reveal": "never",
+        "revealProblems": "onProblem",
+        "showReuseMessage": true,
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Serve Docs",
+      "type": "shell",
+      "command": "pnpm run doc:serve",
+      "group": {
+        "kind": "none",
+        "isDefault": true,
+        "order": 2
+      },
+      "isBackground": true,
+      "dependsOn": ["Generate Docs"],
+      "icon": {
+        "id": "browser",
+        "color": "terminal.ansiYellow"
+      },
+      "presentation": {
+        "reveal": "always",
+        "revealProblems": "onProblem",
+        "showReuseMessage": true,
+        "panel": "shared",
+        "clear": true,
+        "echo": true,
+        "focus": true
+      },
+      "runOptions": {
+        "instanceLimit": 1,
+        "reevaluateOnRerun": true
+      },
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "label": "Set Up",
+      "type": "shell",
+      "command": "pnpm i && pnpm prepare",
+      "group": {
+        "kind": "none",
+        "isDefault": true,
+        "order": 1
+      },
+      "icon": {
+        "id": "vm-active",
+        "color": "terminal.ansiCyan"
+      },
+    }
+  ],
+  "grunt.autoDetect": "off",
+  "jake.autoDetect": "off",
+  "gulp.autoDetect": "off",
+  "npm.autoDetect": "off"
+}
