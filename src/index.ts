@@ -36,7 +36,7 @@ const handler = async () => {
   const { url } = await startStandaloneServer<Context>(server, {
     listen: { port: 4000 },
     // Share context between middlewares
-    context: async ({ req, res }) => {
+    context: async ({ req }) => {
       const token = req.headers.authorization as string
       const currentUser = jwt.decode(token) as string
 
