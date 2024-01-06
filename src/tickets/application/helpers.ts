@@ -1,7 +1,7 @@
 import { Ticket } from '@prisma/client'
 import { raise } from '@shared/helpers/errors'
 import { ticket } from '@tickets/domain/controllers'
-import type { TicketData } from '@tickets/types/core/types'
+import type { Ticket as TicketData } from '@tickets/types/core/types'
 
 /**
  * Find a ticket by id
