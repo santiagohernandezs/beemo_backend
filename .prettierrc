@@ -9,12 +9,12 @@
   "proseWrap": "preserve",
   "quoteProps": "as-needed",
   "requirePragma": false,
+  "endOfLine": "lf",
   "semi": false,
   "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "none",
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
-  "printWidth": 120,
-  "insertSpaces": true
+  "printWidth": 120
 }

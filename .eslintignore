@@ -1,2 +1,9 @@
 node_modules
 .husky
+docs
+coverage
+.vscode
+.github
+prisma/migrations
+prisma/schema.prisma
+jest.config.js
