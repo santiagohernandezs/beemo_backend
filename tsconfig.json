@@ -30,6 +30,15 @@
       "@db/*": ["src/db/*"]
     }
   },
-  "include": ["./src/**/*.ts", "./utils/**/*.ts"],
+  "include": [
+    "./src/**/*.ts",
+    "./utils/**/*.ts",
+    "./prettier.config.js",
+    "./typedoc.config.cjs",
+    "./eslint.config.js",
+    "./jest.config.js",
+    "./test/**/*.ts",
+    "./prisma/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }
