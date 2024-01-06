@@ -8,7 +8,8 @@
     "GraphQL.vscode-graphql-syntax", // GraphQL
     "yoavbls.pretty-ts-errors", // Pretty TS Errors
     "Prisma.prisma", // Prisma
-    "esbenp.prettier-vscode" // Prettier
+    "esbenp.prettier-vscode", // Prettier
+    "adrianwilczynski.toggle-hidden" // Toggle Hidden Files
   ],
   "unwantedRecommendations": []
 }
