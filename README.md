@@ -6,10 +6,12 @@ of each team as well. All of this and more, in a simple and easy to use interfac
 
 ## Tabla de Contenidos
 
-1. [Setup](#setup)
-3. [Contribución](#contribución)
-4. [Tests](#tests)
-5. [Licencia](#licencia)
+1. [Prerequisites](#prerequisites)
+2. [Setup](#setup)
+3. [Commands](#commands)
+4. [Project Configuration](#project-configuration)
+5. [Project Structure](#project-structure)
+
 
 ## Prerequisites
 
@@ -36,7 +38,22 @@ pnpm install
 3. Create a .env file in the root of the project, and add the following variables.
 
 ```bash
-DATABASE_URL=postgres://USER:PASSWORD@localhost:8080/DATABASE
+# DATABASE_URL=postgres://<username>:<password>@<host>:<port>/<database>
+DATABASE_URL=postgres://root:root@localhost:8080/root
+```
+
+You can change the values of the variables if you want by raplacing the values in the docker-compose.yml file.
+
+```yml
+db:
+  container_name: postgres_db
+  ports:
+    - "PORT:5432"
+  image: postgres:14
+  environment:
+    POSTGRES_USER: MY_USERNAME
+    POSTGRES_PASSWORD: MY_PASSWORD
+    POSTGRES_DB: MY_DATABASE
 ```
 
 4. Run the database container.
@@ -69,8 +86,7 @@ Commands related to the project itself. These commands are used to build, mantai
 | --- | --- |
 | `pnpm prepare` | Install husky. |
 | `pnpm dev` | Runs the application in development mode. |
-| `pnpm getready` | A quick way to get the project ready to run including installing dependencies, running the database container and migrations. |
-
+| `pnpm getready` | A quick way to get the project ready and running. |
 
 ### Format/Lint Commands
 
@@ -117,6 +133,15 @@ but if you want to, just make sure you know what you are doing, and you are not 
 
 The project is structured in a way that makes it easy to navigate and understand. The project is divided in five main folders, `docs`, `prisma`, `src`, `tests` and `utils`.
 
+```
+└── 📁beemo_backend
+    └── 📁docs <- Project Documentation
+    └── 📁prisma <- Prisma files
+    └── 📁src <- Project Source
+    └── 📁test <- Unit tests
+    └── 📁utils <- Project Utilities
+```
+
 ### Docs
 
 The `docs` folder contains the documentation of the project. The documentation is generated using [TypeDoc](https://typedoc.org/). You can generate the documentation by running the `pnpm doc:generate` command, and serve it in the browser by running the `pnpm doc:serve` command.
@@ -125,9 +150,26 @@ The `docs` folder contains the documentation of the project. The documentation i
 
 The `prisma` folder contains the schema.prisma file. This file is used by [Prisma](https://www.prisma.io/) to generate the database client. You can learn more about Prisma [here](https://www.prisma.io/).
 
+```
+└── 📁prisma
+    └── data.ts <- Data to seed the database
+    └── 📁migrations <- Migrations
+    └── schema.prisma <- Prisma schema
+    └── seed.ts <- Seed the database
+```
+
 ### Src
 
 The `src` folder contains the source code of the project. This folder is divided in many subfolders, each one with a different purpose. Each subfolder is considered a module of the project and each module is separated in four subfolders, `application`, `domain`, `infrastructure` and `types`.
+
+```
+└── 📁src
+    └── 📁module <- Module directory
+        └── 📁application <- Application layer
+        └── 📁domain <- Domain layer
+        └── 📁infrastructure <- Infrastructure layer
+        └── 📁types <- Type layer
+```
 
 #### Application
 
@@ -152,8 +194,3 @@ The `tests` folder contains the tests of the project. The tests are written usin
 ### Utils
 
 The `utils` folder contains the utilities of the project.
-
-## Licencia
-
-Información sobre la licencia.
-
