@@ -1,0 +1,48 @@
+name: Feature Request
+description: Got a cool idea? Let us know!
+title: ':bulb: [FEATURE REQUEST]'
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an idea to make this project better! Please fill out the sections below to help us understand your suggestion.
+
+        **Note:** If you're reporting a bug, please use the bug report template instead.
+        **Note:** If you're looking for help, please use the help request template instead.
+
+        Remember to check of the bug report already exists before submitting a new one. Thanks!
+
+  - type: input
+    id: title
+    attributes:
+      label: Feature Request Title
+      description: A short, descriptive title.
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Request Description
+      description: |
+        - What is the problem you're trying to solve?
+        - What is the feature you'd like to see implemented?
+        - What is the expected behavior?
+    validations:
+      required: true
+  - type: textarea
+    id: anything-else
+    attributes:
+      label: Anything Else?
+      description: Is there anything else you'd like to add?
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: |
+        - This project has a code of conduct that everyone is expected to follow. By opening an issue or pull request, you agree to follow and enforce the code of conduct.
+      options:
+        - label: I have read the Contributing Guidelines and Code of Conduct
+          required: true
