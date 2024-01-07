@@ -1,0 +1,57 @@
+name: Bug Report
+description: Something isn't working as expected? Let us know!
+title: ':bug: [BUG REPORT]'
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the sections below to help us understand what's going on.
+
+        **Note:** If you're looking for help, please use the help request template instead.
+        **Note:** If you're suggesting a feature, please use the feature request template instead.
+
+        Remember to check of the bug report already exists before submitting a new one. Thanks!
+  - type: input
+    id: title
+    attributes:
+      label: Bug Report Title
+      description: A short, descriptive title.
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Report Description
+      description: |
+        - What is the problem you're experiencing?
+        - What did you expect to happen?
+        - What actually happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps
+      description: |
+        - What are the steps to reproduce the issue?
+        - What is the expected behavior?
+        - What is the actual behavior?
+    validations:
+      required: true
+  - type: textarea
+    id: anything-else
+    attributes:
+      label: Anything Else?
+      description: Is there anything else you'd like to add?
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: |
+        - This project has a code of conduct that everyone is expected to follow. By opening an issue or pull request, you agree to follow and enforce the code of conduct.
+      options:
+        - label: I have read the Contributing Guidelines and Code of Conduct
+          required: true
