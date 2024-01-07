@@ -6,10 +6,12 @@ of each team as well. All of this and more, in a simple and easy to use interfac
 
 ## Tabla de Contenidos
 
-1. [Setup](#setup)
-3. [Contribución](#contribución)
-4. [Tests](#tests)
-5. [Licencia](#licencia)
+1. [Prerequisites](#prerequisites)
+2. [Setup](#setup)
+3. [Commands](#commands)
+4. [Project Configuration](#project-configuration)
+5. [Project Structure](#project-structure)
+
 
 ## Prerequisites
 
