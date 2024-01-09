@@ -1,5 +1,8 @@
 {
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
+  },
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-issue-config.json": "file:///c%3A/Users/santi/code/personal/projects/beemo_backend/.github/ISSUE_TEMPLATE/config.yml"
   }
 }
